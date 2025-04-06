@@ -8,11 +8,12 @@ using namespace sf;
 class Player {
 public:
     Player(RenderWindow& window);
-    void HandleMove(std::optional<Event>);
+    void HandleMove();
     void draw();
 private:
     CircleShape sprite;
     RenderWindow& window;
+    Vector2f velocity;
 };
 
 

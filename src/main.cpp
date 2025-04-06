@@ -16,8 +16,8 @@ int main()
             {
                 window.close();
             }
-            player.HandleMove(event);
         }
+        player.HandleMove();
         player.draw();
         window.display();
     }

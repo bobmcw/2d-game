@@ -14,6 +14,7 @@ Player::Player(RenderWindow &window)
 }
 
 void Player::HandleMove() {
+    auto MAX_VELOCITY = 3.0f;
     //account for floating point inaccuracy
     if (this->velocity.y > -0.1f && this->velocity.y < 0.1f) {
         this->velocity.y = 0.0f;
@@ -25,7 +26,9 @@ void Player::HandleMove() {
         if (this->velocity.y > 0.0f) {
             this->velocity.y = 0.0f;
         }
-        this->velocity.y += -0.1f;
+        if (this->velocity.y > -MAX_VELOCITY) {
+            this->velocity.y += -0.1f;
+        }
     } else if (this->velocity.y < 0.0f) {
         this->velocity.y += 0.1f;
     }
@@ -33,7 +36,9 @@ void Player::HandleMove() {
         if (this->velocity.y < 0.0f) {
             this->velocity.y = 0.0f;
         }
-        this->velocity.y += 0.1f;
+        if (this->velocity.y < MAX_VELOCITY) {
+            this->velocity.y += 0.1f;
+        }
     } else if (this->velocity.y > 0.0f) {
         this->velocity.y += -0.1f;
     }
@@ -41,7 +46,9 @@ void Player::HandleMove() {
         if (this->velocity.x > 0.0f) {
             this->velocity.x = 0.0f;
         }
-        this->velocity.x += -0.1f;
+        if (this->velocity.x > -MAX_VELOCITY) {
+            this->velocity.x += -0.1f;
+        }
     } else if (this->velocity.x < 0.0f) {
         this->velocity.x += 0.1;
     }
@@ -49,7 +56,9 @@ void Player::HandleMove() {
         if (this->velocity.x < 0.0f) {
             this->velocity.x = 0.0f;
         }
-        this->velocity.x += 0.1f;
+        if (this->velocity.x < MAX_VELOCITY) {
+            this->velocity.x += 0.1f;
+        }
     } else if (this->velocity.x > 0.0f) {
         this->velocity.x += -0.1f;
     }

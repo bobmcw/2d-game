@@ -5,12 +5,22 @@
 
 using namespace sf;
 
+struct PressedKeys {
+    bool W;
+    bool S;
+    bool A;
+    bool D;
+};
+
 class Player {
 public:
     Player(RenderWindow& window);
-    void HandleMove();
+    void handleMove();
+    void listenForKeyPresses(std::optional<Event> event);
     void draw();
+    void update();
 private:
+    PressedKeys pressedKeys;
     CircleShape sprite;
     RenderWindow& window;
     Vector2f velocity;

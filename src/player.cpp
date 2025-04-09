@@ -6,14 +6,49 @@ using namespace sf;
 
 Player::Player(RenderWindow &window)
     : window(window) {
+    this->pressedKeys = PressedKeys();
     this->sprite = CircleShape(10);
     this->sprite.setPosition({500, 500});
     this->sprite.setFillColor(Color::White);
     this->window.draw(this->sprite);
     this->velocity = Vector2f(0, 0);
 }
+void Player::update() {
+    this->handleMove();
+    this->draw();
+}
+void Player::listenForKeyPresses(std::optional<Event> event) {
+   if (auto const e = event->getIf<Event::KeyPressed>()) {
+        if (e->code == Keyboard::Key::W) {
+            this->pressedKeys.W = true;
+        }
+        else if (e->code == Keyboard::Key::S) {
+            this->pressedKeys.S = true;
+        }
+        else if (e->code == Keyboard::Key::A) {
+            this->pressedKeys.A = true;
+        }
+        else if (e->code == Keyboard::Key::D) {
+            this->pressedKeys.D = true;
+        }
+   }
+    else if (auto const e = event->getIf<Event::KeyReleased>()) {
+        if (e->code == Keyboard::Key::W) {
+            this->pressedKeys.W = false;
+        }
+        else if (e->code == Keyboard::Key::S) {
+            this->pressedKeys.S = false;
+        }
+        else if (e->code == Keyboard::Key::A) {
+            this->pressedKeys.A = false;
+        }
+        else if (e->code == Keyboard::Key::D) {
+            this->pressedKeys.D = false;
+        }
+    }
+}
 
-void Player::HandleMove() {
+void Player::handleMove() {
     auto MAX_VELOCITY = 3.0f;
     //account for floating point inaccuracy
     if (this->velocity.y > -0.1f && this->velocity.y < 0.1f) {
@@ -22,7 +57,7 @@ void Player::HandleMove() {
     if (this->velocity.x > -0.1f && this->velocity.x < 0.1f) {
         this->velocity.x = 0.0f;
     }
-    if (isKeyPressed(Keyboard::Key::W)) {
+    if (this->pressedKeys.W) {
         if (this->velocity.y > 0.0f) {
             this->velocity.y = 0.0f;
         }
@@ -32,7 +67,7 @@ void Player::HandleMove() {
     } else if (this->velocity.y < 0.0f) {
         this->velocity.y += 0.1f;
     }
-    if (isKeyPressed(Keyboard::Key::S)) {
+    if (this->pressedKeys.S) {
         if (this->velocity.y < 0.0f) {
             this->velocity.y = 0.0f;
         }
@@ -42,7 +77,7 @@ void Player::HandleMove() {
     } else if (this->velocity.y > 0.0f) {
         this->velocity.y += -0.1f;
     }
-    if (isKeyPressed(Keyboard::Key::A)) {
+    if (this->pressedKeys.A) {
         if (this->velocity.x > 0.0f) {
             this->velocity.x = 0.0f;
         }
@@ -52,7 +87,7 @@ void Player::HandleMove() {
     } else if (this->velocity.x < 0.0f) {
         this->velocity.x += 0.1;
     }
-    if (isKeyPressed(Keyboard::Key::D)) {
+    if (this->pressedKeys.D) {
         if (this->velocity.x < 0.0f) {
             this->velocity.x = 0.0f;
         }

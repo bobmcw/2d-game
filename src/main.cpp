@@ -16,9 +16,9 @@ int main()
             {
                 window.close();
             }
+            player.listenForKeyPresses(event);
         }
-        player.HandleMove();
-        player.draw();
+        player.update();
         window.display();
     }
 }

@@ -16,8 +16,18 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(SFML)
 
+FetchContent_Declare(
+        fmt
+        GIT_REPOSITORY  https://github.com/fmtlib/fmt
+        GIT_TAG         11.0.2
+)
+
+FetchContent_MakeAvailable(fmt)
+
 add_executable(main src/main.cpp
         src/player.cpp
-        src/player.h)
+        src/player.h
+        src/map_parser.cpp
+        src/map_parser.h)
 #target_compile_features(main PRIVATE cxx_std_17)
-target_link_libraries(main PRIVATE SFML::Graphics)
+target_link_libraries(main PRIVATE SFML::Graphics fmt)

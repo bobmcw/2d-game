@@ -15,7 +15,7 @@ Map_parser::Map_parser(sf::RenderWindow &window) : window(window) {
 }
 
 void Map_parser::load_maps() {
-    for(auto const& mapFile : fs::directory_iterator(fs::path("./maps"))) {
+    for(auto const& mapFile : fs::directory_iterator(fs::path("./Assets/maps"))) {
         auto line = std::string();
         auto map = std::fstream(mapFile);
         auto stringMap = std::vector<std::string>();

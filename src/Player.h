@@ -21,6 +21,7 @@ public:
     void listenForKeyPresses(std::optional<Event> event);
     void draw();
     void update();
+    Sprite getSprite();
 private:
     PressedKeys pressedKeys;
     Sprite sprite;

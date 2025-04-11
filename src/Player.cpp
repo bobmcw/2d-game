@@ -20,6 +20,9 @@ Player::Player(RenderWindow &window)
     this->window.draw(this->sprite);
     this->velocity = Vector2f(0, 0);
 }
+Sprite Player::getSprite() {
+    return this->sprite;
+}
 
 void Player::update() {
     this->handleMove();

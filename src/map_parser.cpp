@@ -1,0 +1,55 @@
+#include "map_parser.h"
+#include <filesystem>
+#include <fstream>
+#include <iostream>
+#include <vector>
+
+#include "Terrain.h"
+#include "fmt/ranges.h"
+
+namespace fs = std::filesystem;
+
+Map_parser::Map_parser(sf::RenderWindow &window) : window(window) {
+    this->maps = std::vector<std::vector<std::string>>{};
+    this->loadedSprites = std::vector<Terrain*>{};
+}
+
+void Map_parser::load_maps() {
+    for(auto const& mapFile : fs::directory_iterator(fs::path("./maps"))) {
+        auto line = std::string();
+        auto map = std::fstream(mapFile);
+        auto stringMap = std::vector<std::string>();
+        while (std::getline(map,line)) {
+            stringMap.push_back( line );
+        }
+        this->maps.push_back(stringMap);
+    }
+        fmt::println("{}",this->maps);
+}
+void Map_parser::load_next_map(int startX, int startY) {
+    auto x = startX;
+    auto y = startY;
+    auto map = this->maps.front();
+    for (auto &line : map) {
+        for (auto c : line) {
+            switch (c) {
+                case 'W': {
+                    this->loadedSprites.push_back(new Wall(this->window,x,y));
+                    break;
+                }
+                default: {
+                    fmt::println("invalid symbol {}",c);
+                }
+            }
+            x += 50;
+        }
+        x = startX;
+        y+= 50;
+    }
+}
+void Map_parser::draw_current_map() {
+    for (auto t : this->loadedSprites) {
+        t->draw();
+    }
+}
+

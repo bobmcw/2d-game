@@ -2,6 +2,8 @@
 #define PLAYER_H
 #include "SFML/Graphics/CircleShape.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
+#include "SFML/Graphics/Sprite.hpp"
+#include "SFML/Graphics/Texture.hpp"
 
 using namespace sf;
 
@@ -21,7 +23,8 @@ public:
     void update();
 private:
     PressedKeys pressedKeys;
-    CircleShape sprite;
+    Sprite sprite;
+    Texture texture;
     RenderWindow& window;
     Vector2f velocity;
 };

@@ -1,18 +1,26 @@
 #include "player.h"
 
+#include <iostream>
+
+#include "fmt/args.h"
 #include "SFML/Window/Keyboard.hpp"
 
 using namespace sf;
 
 Player::Player(RenderWindow &window)
-    : window(window) {
+    : sprite(this->texture), window(window) {
     this->pressedKeys = PressedKeys();
-    this->sprite = CircleShape(10);
+    this->texture = Texture();
+    if (!this->texture.loadFromFile("Assets/textures/player.png")) {
+        std::cerr << "failed to load /Assets/textures/player.png";
+    }
+    this->sprite = Sprite(this->texture);
     this->sprite.setPosition({500, 500});
-    this->sprite.setFillColor(Color::White);
+    this->sprite.setTextureRect(sf::IntRect({0, 0}, {50, 50}));
     this->window.draw(this->sprite);
     this->velocity = Vector2f(0, 0);
 }
+
 void Player::update() {
     this->handleMove();
     this->draw();

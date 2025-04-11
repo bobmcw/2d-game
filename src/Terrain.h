@@ -10,9 +10,8 @@
 
 class Terrain {
 public:
-    void draw() {
-
-    };
+    virtual void draw() = 0;
+    virtual ~Terrain() = default;
 protected:
     int x;
     int y;
@@ -27,7 +26,7 @@ class Wall : public Terrain {
 public:
     Wall(sf::RenderWindow &window, int x, int y);
 
-    void draw();
+    void draw() override;
 };
 
 

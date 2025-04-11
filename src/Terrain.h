@@ -10,13 +10,17 @@
 
 class Terrain {
 public:
+    bool hasColision;
     virtual void draw() = 0;
     virtual ~Terrain() = default;
+
+    sf::Sprite getSprite() {
+        return this->sprite;
+    }
 protected:
     int x;
     int y;
     int size;
-    bool hasColision;
     sf::RenderWindow& window;
     Terrain(sf::RenderWindow &window, int x, int y, int size);
     sf::Texture texture;

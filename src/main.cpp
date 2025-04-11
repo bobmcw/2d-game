@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "map_parser.h"
-#include "player.h"
+#include "Player.h"
 #include "Terrain.h"
 
 int main()

@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 
+#include "Collision_detector.h"
 #include "map_parser.h"
 #include "Player.h"
 #include "Terrain.h"
@@ -11,7 +12,8 @@ int main()
     auto player = Player(window);
     auto maploader = Map_parser(window);
     maploader.load_maps();
-    maploader.load_next_map(0,0);
+    maploader.load_next_map(400,400);
+    auto collision_detector = Collision_detector(player, maploader.get_loaded_sprites());
     while (window.isOpen())
     {
         window.clear();
@@ -23,6 +25,7 @@ int main()
             }
             player.listenForKeyPresses(event);
         }
+        collision_detector.checkColisionWithPlayer();
         maploader.draw_current_map();
         player.update();
         window.display();

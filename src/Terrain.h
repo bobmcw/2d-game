@@ -13,7 +13,6 @@ public:
     bool hasColision;
     virtual void draw() = 0;
     virtual ~Terrain() = default;
-
     sf::Sprite getSprite() {
         return this->sprite;
     }

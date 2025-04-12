@@ -14,6 +14,11 @@ Map_parser::Map_parser(sf::RenderWindow &window) : window(window) {
     this->loadedSprites = std::vector<Terrain*>{};
 }
 
+std::vector<Terrain *> &Map_parser::get_loaded_sprites() {
+    return this->loadedSprites;
+}
+
+
 void Map_parser::load_maps() {
     for(auto const& mapFile : fs::directory_iterator(fs::path("./Assets/maps"))) {
         auto line = std::string();

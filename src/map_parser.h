@@ -11,6 +11,8 @@ public:
     void load_maps();
     void load_next_map(int startX, int startY);
     void draw_current_map();
+
+    std::vector<Terrain *> &get_loaded_sprites();
 private:
     sf::RenderWindow& window;
     std::vector<Terrain*> loadedSprites = std::vector<Terrain*>{};

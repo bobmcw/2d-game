@@ -6,7 +6,7 @@
 #include "SFML/Graphics/RenderWindow.hpp"
 
 Terrain::Terrain(sf::RenderWindow &window, int x,int y,int size) : window(window), sprite(this->texture) {
-    this->hasColision = false;
+    this->hasCollision = false;
     this->x = x;
     this->y = y;
     this->size = size;
@@ -14,7 +14,7 @@ Terrain::Terrain(sf::RenderWindow &window, int x,int y,int size) : window(window
 
 Wall::Wall(sf::RenderWindow &window, int x, int y)
     : Terrain(window,x,y,50) {
-        this->hasColision = true;
+        this->hasCollision = true;
         this->size = 50;
     this->texture = sf::Texture();
     if (!this->texture.loadFromFile("Assets/textures/wall.png")) {

@@ -10,7 +10,7 @@
 
 class Terrain {
 public:
-    bool hasColision;
+    bool hasCollision;
     virtual void draw() = 0;
     virtual ~Terrain() = default;
     sf::Sprite getSprite() {

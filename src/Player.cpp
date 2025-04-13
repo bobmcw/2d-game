@@ -4,6 +4,7 @@
 
 #include "fmt/args.h"
 #include "SFML/Window/Keyboard.hpp"
+#include <cmath>
 
 using namespace sf;
 
@@ -24,8 +25,20 @@ Sprite& Player::getSprite() {
     return this->sprite;
 }
 
+void Player::drawCrosshair() {
+    auto croshairVisualization = CircleShape(10);
+    croshairVisualization.setFillColor(Color::Green);
+    auto mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+    auto delta = mousePos - this->sprite.getPosition();
+    auto angle = std::atan2(delta.y,delta.x);
+    //https://en.sfml-dev.org/forums/index.php?topic=5992.0
+    croshairVisualization.setPosition(this->sprite.getGlobalBounds().getCenter() + Vector2f(50 * cos(angle), 50 * sin(angle)));
+    this->window.draw(croshairVisualization);
+}
+
 void Player::update() {
     this->handleMove();
+    this->drawCrosshair();
     this->draw();
 }
 void Player::listenForKeyPresses(std::optional<Event> event) {

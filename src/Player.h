@@ -22,6 +22,9 @@ public:
     void draw();
     void update();
     Sprite& getSprite();
+
+    void drawCrosshair();
+
 private:
     PressedKeys pressedKeys;
     Sprite sprite;

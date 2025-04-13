@@ -15,17 +15,21 @@ void Collision_detector::checkColisionWithPlayer() {
     for (auto t: this->loaded_terrain) {
         if (this->player.getSprite().getGlobalBounds().findIntersection(t->getSprite().getGlobalBounds())) {
             fmt::println("intersection");
+            //from bottom
             if (this->player.getSprite().getPosition().y > t->getSprite().getPosition().y) {
                 player.getSprite().setPosition({this->player.getSprite().getPosition().x, t->getSprite().getPosition().y + t->getSprite().getGlobalBounds().size.y});
             }
+            //from top
             else if(this->player.getSprite().getPosition().y < t->getSprite().getPosition().y) {
                 player.getSprite().setPosition({this->player.getSprite().getPosition().x, t->getSprite().getPosition().y - t->getSprite().getGlobalBounds().size.y});
             }
-            if (this->player.getSprite().getPosition().x > t->getSprite().getPosition().x) {
-                player.getSprite().setPosition({t->getSprite().getPosition().x + t->getSprite().getGlobalBounds().size.x,this->player.getSprite().getPosition().y});
+            //from right
+            else if (this->player.getSprite().getPosition().x > t->getSprite().getPosition().x) {
+                player.getSprite().setPosition({t->getSprite().getPosition().x + t->getSprite().getGlobalBounds().size.x, this->player.getSprite().getPosition().y});
             }
+            //from left
             else if(this->player.getSprite().getPosition().x < t->getSprite().getPosition().x) {
-                player.getSprite().setPosition({t->getSprite().getPosition().x - t->getSprite().getGlobalBounds().size.x,this->player.getSprite().getPosition().y});
+                player.getSprite().setPosition({t->getSprite().getPosition().x - t->getSprite().getGlobalBounds().size.x, this->player.getSprite().getPosition().y});
             }
         }
     }

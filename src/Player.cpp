@@ -8,8 +8,8 @@
 
 using namespace sf;
 
-Player::Player(RenderWindow &window)
-    : sprite(this->texture), window(window) {
+Player::Player(RenderWindow &window, ProjectileManager &projectile_manager)
+    : sprite(this->texture), window(window), projectile_manager(projectile_manager) {
     this->pressedKeys = PressedKeys();
     this->texture = Texture();
     if (!this->texture.loadFromFile("Assets/textures/player.png")) {
@@ -21,6 +21,7 @@ Player::Player(RenderWindow &window)
     this->window.draw(this->sprite);
     this->velocity = Vector2f(0, 0);
 }
+
 Sprite& Player::getSprite() {
     return this->sprite;
 }
@@ -34,6 +35,16 @@ void Player::drawCrosshair() {
     //https://en.sfml-dev.org/forums/index.php?topic=5992.0
     croshairVisualization.setPosition(this->sprite.getGlobalBounds().getCenter() + Vector2f(50 * cos(angle), 50 * sin(angle)));
     this->window.draw(croshairVisualization);
+}
+
+void Player::shoot() {
+    auto mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+    auto delta = mousePos - this->sprite.getPosition();
+    auto angle = std::atan2(delta.y,delta.x);
+    //https://en.sfml-dev.org/forums/index.php?topic=5992.0
+    auto position = this->sprite.getGlobalBounds().getCenter() + Vector2f(50 * cos(angle), 50 * sin(angle));
+    this->projectile_manager.addProjectile(new Projectile({1,1},this->sprite.getGlobalBounds().getCenter() + Vector2f(50 * cos(angle), 50 * sin(angle))));
+
 }
 
 void Player::update() {
@@ -70,6 +81,12 @@ void Player::listenForKeyPresses(std::optional<Event> event) {
             this->pressedKeys.D = false;
         }
     }
+    else if (auto const e = event->getIf<Event::MouseButtonPressed>()) {
+       if (e->button == Mouse::Button::Left) {
+           this->shoot();
+           fmt::println("pew");
+       }
+   }
 }
 
 void Player::handleMove() {

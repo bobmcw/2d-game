@@ -1,5 +1,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
+#include "ProjectileManager.h"
 #include "SFML/Graphics/CircleShape.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
 #include "SFML/Graphics/Sprite.hpp"
@@ -16,20 +17,21 @@ struct PressedKeys {
 
 class Player {
 public:
-    Player(RenderWindow& window);
+    Player(RenderWindow& window, ProjectileManager& projectile_manager);
     void handleMove();
     void listenForKeyPresses(std::optional<Event> event);
     void draw();
     void update();
     Sprite& getSprite();
-
     void drawCrosshair();
+    void shoot();
 
 private:
     PressedKeys pressedKeys;
     Sprite sprite;
     Texture texture;
     RenderWindow& window;
+    ProjectileManager& projectile_manager;
     Vector2f velocity;
 };
 

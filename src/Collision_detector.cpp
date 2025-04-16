@@ -13,7 +13,7 @@ void Collision_detector::checkColisionWithPlayer() {
     // fmt::println("player x:{} y:{}",player.getSprite().getGlobalBounds().position.x, player.getSprite().getGlobalBounds().position.y);
     // fmt::println("intersection : {}", this->loaded_terrain[0]->getSprite().getGlobalBounds().findIntersection(this->player.getSprite().getGlobalBounds()) != std::nullopt);
     for (auto t: this->loaded_terrain) {
-        if (this->player.getSprite().getGlobalBounds().findIntersection(t->getSprite().getGlobalBounds())) {
+        if (this->player.getSprite().getGlobalBounds().findIntersection(t->getSprite().getGlobalBounds()) && t->hasCollision) {
             fmt::println("intersection");
             //from bottom
             if (this->player.getSprite().getPosition().y > t->getSprite().getPosition().y) {

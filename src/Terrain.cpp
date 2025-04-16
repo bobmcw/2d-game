@@ -5,7 +5,7 @@
 
 #include "SFML/Graphics/RenderWindow.hpp"
 
-Terrain::Terrain(sf::RenderWindow &window, int x,int y,std::string textureName) : window(window), sprite(this->texture) {
+Terrain::Terrain(sf::RenderWindow &window, int x,int y,const std::string& textureName) : window(window), sprite(this->texture) {
     this->hasCollision = false;
     this->x = x;
     this->y = y;

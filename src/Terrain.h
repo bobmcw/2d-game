@@ -21,7 +21,7 @@ protected:
     int y;
     int size;
     sf::RenderWindow& window;
-    Terrain(sf::RenderWindow &window, int x, int y, std::string textureName);
+    Terrain(sf::RenderWindow &window, int x, int y, const std::string& textureName);
     sf::Texture texture;
     sf::Sprite sprite;
 };

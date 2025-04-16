@@ -13,7 +13,7 @@ int main()
     auto player = Player(window,projectileManager);
     auto maploader = Map_parser(window);
     maploader.load_maps();
-    maploader.load_next_map(400,400);
+    maploader.load_next_map(0,0);
     auto collision_detector = Collision_detector(player, maploader.get_loaded_sprites());
     while (window.isOpen())
     {

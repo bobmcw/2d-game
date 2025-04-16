@@ -11,7 +11,7 @@
 class Terrain {
 public:
     bool hasCollision;
-    virtual void draw() = 0;
+    void draw() const;
     virtual ~Terrain() = default;
     sf::Sprite getSprite() {
         return this->sprite;
@@ -28,9 +28,10 @@ protected:
 class Wall : public Terrain {
 public:
     Wall(sf::RenderWindow &window, int x, int y);
-
-    void draw() override;
 };
-
+class Floor : public Terrain {
+public:
+    Floor(sf::RenderWindow &window, int x, int y);
+};
 
 #endif //TERAIN_H

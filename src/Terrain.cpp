@@ -12,6 +12,10 @@ Terrain::Terrain(sf::RenderWindow &window, int x,int y,int size) : window(window
     this->size = size;
 }
 
+void Terrain::draw() const {
+    this->window.draw(this->sprite);
+}
+
 Wall::Wall(sf::RenderWindow &window, int x, int y)
     : Terrain(window,x,y,50) {
         this->hasCollision = true;
@@ -24,8 +28,4 @@ Wall::Wall(sf::RenderWindow &window, int x, int y)
     this->sprite = sf::Sprite(this->texture);
     this->sprite.setTextureRect(sf::IntRect({this->x,this->y},{this->size,this->size}));
     this->sprite.setPosition({static_cast<float>(this->x),static_cast<float>(this->y)});
-}
-
-void Wall::draw() {
-    this->window.draw(this->sprite);
 }

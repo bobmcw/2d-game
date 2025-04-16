@@ -21,9 +21,7 @@ Wall::Wall(sf::RenderWindow &window, int x, int y)
         this->hasCollision = true;
         this->size = 50;
     this->texture = sf::Texture();
-    if (!this->texture.loadFromFile("Assets/textures/wall.png")) {
-        std::cerr << "failed to load texture Assets/textures/wall.png";
-    }
+    assert(this->texture.loadFromFile("Assets/textures/wall.png"));
     this->texture.setRepeated(true);
     this->sprite = sf::Sprite(this->texture);
     this->sprite.setTextureRect(sf::IntRect({this->x,this->y},{this->size,this->size}));

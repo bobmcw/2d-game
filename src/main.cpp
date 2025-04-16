@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Collision_detector.h"
-#include "map_parser.h"
+#include "Map_parser.h"
 #include "Player.h"
 #include "Terrain.h"
 

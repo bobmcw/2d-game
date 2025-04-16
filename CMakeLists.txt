@@ -25,14 +25,14 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(fmt)
 
 add_executable(main src/main.cpp
-        src/player.cpp
-        src/player.h
-        src/map_parser.cpp
-        src/map_parser.h
+        src/Player.cpp
+        src/Player.h
+        src/Map_parser.cpp
+        src/Map_parser.h
         src/Terrain.cpp
         src/Terrain.h
-        src/collision_detector.cpp
-        src/collision_detector.h
+        src/Collision_detector.cpp
+        src/Collision_detector.h
         src/ProjectileManager.cpp
         src/ProjectileManager.h
         src/Projectile.cpp

@@ -22,7 +22,7 @@ std::vector<Terrain *> &Map_parser::get_loaded_sprites() {
 void Map_parser::load_maps() {
     for(auto const& mapFile : fs::directory_iterator(fs::path("./Assets/maps"))) {
         auto line = std::string();
-        auto map = std::fstream(mapFile);
+        auto map = std::fstream(mapFile.path());
         auto stringMap = std::vector<std::string>();
         while (std::getline(map,line)) {
             stringMap.push_back( line );

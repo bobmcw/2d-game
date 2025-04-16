@@ -42,6 +42,9 @@ void Map_parser::load_next_map(int startX, int startY) {
                     this->loadedSprites.push_back(new Wall(this->window,x,y));
                     break;
                 }
+                case 'F': {
+                    this->loadedSprites.push_back(new Floor(this->window,x,y));
+                }
                 default: {
                     fmt::println("invalid symbol {}",c);
                 }

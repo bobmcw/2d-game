@@ -9,6 +9,8 @@ public:
     ProjectileManager(sf::RenderWindow& window);
     void addProjectile(Projectile* p);
     void updateProjectiles();
+    std::vector<Projectile*> getProjectiles();
+    void removeProjectile(Projectile* p);
 private:
     std::vector<Projectile*> projectiles;
     sf::RenderWindow& window;

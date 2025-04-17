@@ -3,8 +3,8 @@
 
 #include "fmt/args.h"
 
-Collision_detector::Collision_detector(Player &player, std::vector<Terrain*> &loaded_terrain): player(player),
-                                                                                               loaded_terrain(loaded_terrain) {
+Collision_detector::Collision_detector(Player &player, std::vector<Terrain *> &loaded_terrain, ProjectileManager &projectile_manager): player(player),
+    loaded_terrain(loaded_terrain), projectile_manager(projectile_manager) {
 }
 
 
@@ -30,6 +30,18 @@ void Collision_detector::checkColisionWithPlayer() {
             //from left
             else if(this->player.getSprite().getPosition().x < t->getSprite().getPosition().x) {
                 player.getSprite().setPosition({t->getSprite().getPosition().x - t->getSprite().getGlobalBounds().size.x, this->player.getSprite().getPosition().y});
+            }
+        }
+    }
+}
+
+void Collision_detector::checkProjectilesCollision() {
+    for (auto p : this->projectile_manager.getProjectiles()) {
+        for (auto t : this->loaded_terrain) {
+            if (t->hasCollision) {
+                if (p->sprite.getGlobalBounds().findIntersection(t->getSprite().getGlobalBounds())) {
+                    this->projectile_manager.removeProjectile(p);
+                }
             }
         }
     }

@@ -6,11 +6,13 @@
 
 class Collision_detector {
 public:
-    Collision_detector(Player &player, std::vector<Terrain*> &loaded_terrain);
+    Collision_detector(Player &player, std::vector<Terrain*> &loaded_terrain, ProjectileManager &projectile_manager);
     void checkColisionWithPlayer();
+    void checkProjectilesCollision();
 private:
     Player &player;
     std::vector<Terrain *> loaded_terrain;
+    ProjectileManager &projectile_manager;
 };
 
 

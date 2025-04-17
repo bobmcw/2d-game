@@ -14,7 +14,7 @@ int main()
     auto maploader = Map_parser(window);
     maploader.load_maps();
     maploader.load_next_map(0,0);
-    auto collision_detector = Collision_detector(player, maploader.get_loaded_sprites());
+    auto collision_detector = Collision_detector(player, maploader.get_loaded_sprites(),projectileManager);
     while (window.isOpen())
     {
         window.clear();
@@ -26,6 +26,7 @@ int main()
             }
             player.listenForKeyPresses(event);
         }
+        collision_detector.checkProjectilesCollision();
         projectileManager.updateProjectiles();
         collision_detector.checkColisionWithPlayer();
         maploader.draw_current_map();

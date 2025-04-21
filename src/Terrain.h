@@ -33,5 +33,11 @@ class Floor : public Terrain {
 public:
     Floor(sf::RenderWindow &window, int x, int y);
 };
+class Hatch : public Terrain {
+public:
+    Hatch(sf::RenderWindow &window, int x, int y);
+private:
+    bool isOpen;
+};
 
 #endif //TERAIN_H

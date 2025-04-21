@@ -22,7 +22,7 @@ Player::Player(RenderWindow &window, ProjectileManager &projectile_manager)
     this->velocity = Vector2f(0, 0);
 }
 
-Sprite& Player::getSprite() {
+Sprite &Player::getSprite() {
     return this->sprite;
 }
 
@@ -31,21 +31,21 @@ void Player::drawCrosshair() {
     croshairVisualization.setFillColor(Color::Green);
     auto mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
     auto delta = mousePos - this->sprite.getPosition();
-    auto angle = std::atan2(delta.y,delta.x);
+    auto angle = std::atan2(delta.y, delta.x);
     //https://en.sfml-dev.org/forums/index.php?topic=5992.0
-    croshairVisualization.setPosition(this->sprite.getGlobalBounds().getCenter() + Vector2f(50 * cos(angle), 50 * sin(angle)));
+    croshairVisualization.setPosition(
+        this->sprite.getGlobalBounds().getCenter() + Vector2f(50 * cos(angle), 50 * sin(angle)));
     this->window.draw(croshairVisualization);
 }
 
 void Player::shoot() {
     auto mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
     auto delta = mousePos - this->sprite.getPosition();
-    auto angle = std::atan2(delta.y,delta.x);
+    auto angle = std::atan2(delta.y, delta.x);
     //https://en.sfml-dev.org/forums/index.php?topic=5992.0
     auto position = this->sprite.getGlobalBounds().getCenter() + Vector2f(50 * cos(angle), 50 * sin(angle));
-    auto direction = sf::Vector2f(std::cos(angle),std::sin(angle));
-    this->projectile_manager.addProjectile(new Projectile(direction,position));
-
+    auto direction = sf::Vector2f(std::cos(angle), std::sin(angle));
+    this->projectile_manager.addProjectile(new Projectile(direction, position));
 }
 
 void Player::update() {
@@ -53,41 +53,34 @@ void Player::update() {
     this->drawCrosshair();
     this->draw();
 }
+
 void Player::listenForKeyPresses(std::optional<Event> event) {
-   if (auto const e = event->getIf<Event::KeyPressed>()) {
+    if (auto const e = event->getIf<Event::KeyPressed>()) {
         if (e->code == Keyboard::Key::W) {
             this->pressedKeys.W = true;
-        }
-        else if (e->code == Keyboard::Key::S) {
+        } else if (e->code == Keyboard::Key::S) {
             this->pressedKeys.S = true;
-        }
-        else if (e->code == Keyboard::Key::A) {
+        } else if (e->code == Keyboard::Key::A) {
             this->pressedKeys.A = true;
-        }
-        else if (e->code == Keyboard::Key::D) {
+        } else if (e->code == Keyboard::Key::D) {
             this->pressedKeys.D = true;
         }
-   }
-    else if (auto const e = event->getIf<Event::KeyReleased>()) {
+    } else if (auto const e = event->getIf<Event::KeyReleased>()) {
         if (e->code == Keyboard::Key::W) {
             this->pressedKeys.W = false;
-        }
-        else if (e->code == Keyboard::Key::S) {
+        } else if (e->code == Keyboard::Key::S) {
             this->pressedKeys.S = false;
-        }
-        else if (e->code == Keyboard::Key::A) {
+        } else if (e->code == Keyboard::Key::A) {
             this->pressedKeys.A = false;
-        }
-        else if (e->code == Keyboard::Key::D) {
+        } else if (e->code == Keyboard::Key::D) {
             this->pressedKeys.D = false;
         }
+    } else if (auto const e = event->getIf<Event::MouseButtonPressed>()) {
+        if (e->button == Mouse::Button::Left) {
+            this->shoot();
+            fmt::println("pew");
+        }
     }
-    else if (auto const e = event->getIf<Event::MouseButtonPressed>()) {
-       if (e->button == Mouse::Button::Left) {
-           this->shoot();
-           fmt::println("pew");
-       }
-   }
 }
 
 void Player::handleMove() {

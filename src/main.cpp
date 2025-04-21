@@ -7,13 +7,13 @@
 
 int main()
 {
-    auto window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
+    auto window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project",State::Fullscreen);
     window.setFramerateLimit(144);
     auto projectileManager = ProjectileManager(window);
     auto player = Player(window,projectileManager);
     auto maploader = Map_parser(window);
     maploader.load_maps();
-    maploader.load_next_map(0,0);
+    maploader.load_next_map(100,100);
     auto collision_detector = Collision_detector(player, maploader.get_loaded_sprites(),projectileManager);
     while (window.isOpen())
     {
@@ -26,10 +26,10 @@ int main()
             }
             player.listenForKeyPresses(event);
         }
+        maploader.draw_current_map();
         collision_detector.checkProjectilesCollision();
         projectileManager.updateProjectiles();
         collision_detector.checkColisionWithPlayer();
-        maploader.draw_current_map();
         player.update();
         window.display();
     }

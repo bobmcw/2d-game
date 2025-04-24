@@ -13,4 +13,8 @@ void EnemyController::updateEnemies() const {
     }
 }
 
+std::vector<Enemy *> EnemyController::getEnemies() const {
+    return this->enemies;
+}
+
 

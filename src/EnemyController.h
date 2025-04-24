@@ -12,6 +12,7 @@ public:
     EnemyController(sf::RenderWindow &window, Player &player);
     void addEnemy(Enemy *e);
     void updateEnemies() const;
+    std::vector<Enemy*> getEnemies() const;
 private:
     std::vector<Enemy*> enemies;
     sf::RenderWindow &window;

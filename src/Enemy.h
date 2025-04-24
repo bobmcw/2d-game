@@ -9,6 +9,7 @@ public:
     Enemy(int initialX, int initialY);
     sf::Sprite getSprite();
     void MoveTowards(sf::Vector2f position);
+    void takeDamage();
 private:
     sf::Sprite sprite;
     sf::Texture texture;

@@ -19,7 +19,7 @@ int main()
     maploader.load_maps();
     maploader.load_next_map(100,100);
 
-    auto collision_detector = Collision_detector(player, maploader.get_loaded_sprites(),projectileManager);
+    auto collision_detector = Collision_detector(player, maploader.get_loaded_sprites(),projectileManager,enemyController);
 
     enemyController.addEnemy(new Enemy(100,100));
     while (window.isOpen())
@@ -36,10 +36,12 @@ int main()
         //drawing objects
         maploader.draw_current_map();
         projectileManager.updateProjectiles();
-        collision_detector.checkProjectilesCollision();
-        enemyController.updateEnemies();
+        //collision
         collision_detector.checkColisionWithPlayer();
+        collision_detector.checkProjectilesCollision();
+        //updating objects
         player.update();
+        enemyController.updateEnemies();
         window.display();
     }
 }

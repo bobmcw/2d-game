@@ -1,5 +1,5 @@
 #include "Enemy.h"
-
+#include <cmath>
 #include "fmt/base.h"
 
 Enemy::Enemy(int initialX, int initialY) : sprite(this->texture) {

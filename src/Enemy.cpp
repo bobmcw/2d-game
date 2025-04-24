@@ -1,6 +1,7 @@
 #include "Enemy.h"
 #include <cmath>
 #include "fmt/base.h"
+#include "SFML/System/Time.hpp"
 
 Enemy::Enemy(int initialX, int initialY) : sprite(this->texture) {
    this->x = initialX;
@@ -8,9 +9,19 @@ Enemy::Enemy(int initialX, int initialY) : sprite(this->texture) {
    this->texture = sf::Texture();
    assert(texture.loadFromFile("Assets/textures/enemy.png"));
    this->sprite = sf::Sprite(this->texture);
+   this-> health = 10;
+   this->dmgFlashClock = sf::Clock();
 }
 sf::Sprite Enemy::getSprite() {
    return this->sprite;
+}
+
+void Enemy::update() {
+   if (this->dmgFlashClock.isRunning() && this->dmgFlashClock.getElapsedTime().asSeconds() >= 0.2) {
+      this->dmgFlashClock.restart();
+      this->dmgFlashClock.stop();
+      this->sprite.setColor(sf::Color::White);
+   }
 }
 
 void Enemy::MoveTowards(sf::Vector2f position) {
@@ -19,8 +30,18 @@ void Enemy::MoveTowards(sf::Vector2f position) {
    this->sprite.move(sf::Vector2f(1 * cos(angle),1 * sin(angle)));
 }
 
+
 void Enemy::takeDamage() {
-   fmt::print("took dmg");
+   this->health -= 1;
+   this->sprite.setColor(sf::Color::Red);
+   this->dmgFlashClock.start();
+   this->sprite.setColor(sf::Color::Red);
+   if (this->health <= 0) {
+      this->die();
+   }
+}
+
+void Enemy::die() {
 }
 
 

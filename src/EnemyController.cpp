@@ -8,6 +8,7 @@ void EnemyController::addEnemy(Enemy* e) {
 }
 void EnemyController::updateEnemies() const {
     for (Enemy* e : this->enemies) {
+        e->update();
         e->MoveTowards(this->player.getSprite().getPosition());
        this->window.draw(e->getSprite());
     }

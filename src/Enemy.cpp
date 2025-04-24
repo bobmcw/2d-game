@@ -16,7 +16,7 @@ sf::Sprite Enemy::getSprite() {
 void Enemy::MoveTowards(sf::Vector2f position) {
    auto delta = position - this->sprite.getPosition();
    auto angle = std::atan2(delta.y,delta.x);
-   this->sprite.move({1 * cos(angle),1 * sin(angle)});
+   this->sprite.move(sf::Vector2f(1 * cos(angle),1 * sin(angle)));
 }
 
 void Enemy::takeDamage() {

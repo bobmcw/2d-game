@@ -36,12 +36,11 @@ void Enemy::takeDamage() {
    this->sprite.setColor(sf::Color::Red);
    this->dmgFlashClock.start();
    this->sprite.setColor(sf::Color::Red);
-   if (this->health <= 0) {
-      this->die();
-   }
 }
 
-void Enemy::die() {
+
+bool Enemy::isDead() {
+   return this->health<=0;
 }
 
 

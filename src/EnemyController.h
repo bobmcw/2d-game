@@ -11,7 +11,8 @@ class EnemyController {
 public:
     EnemyController(sf::RenderWindow &window, Player &player);
     void addEnemy(Enemy *e);
-    void updateEnemies() const;
+    void removeEnemy(Enemy *e);
+    void updateEnemies();
     std::vector<Enemy*> getEnemies() const;
 private:
     std::vector<Enemy*> enemies;

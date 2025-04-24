@@ -9,12 +9,11 @@ class Enemy {
 public:
     Enemy(int initialX, int initialY);
     sf::Sprite getSprite();
-
     void update();
-
     void MoveTowards(sf::Vector2f position);
     void takeDamage();
     void die();
+    bool isDead();
 private:
     sf::Sprite sprite;
     sf::Texture texture;

@@ -25,19 +25,23 @@ protected:
     sf::Texture texture;
     sf::Sprite sprite;
 };
+
 class Wall : public Terrain {
 public:
     Wall(sf::RenderWindow &window, int x, int y);
 };
+
 class Floor : public Terrain {
 public:
     Floor(sf::RenderWindow &window, int x, int y);
 };
+
 class Hatch : public Terrain {
 public:
     Hatch(sf::RenderWindow &window, int x, int y);
 private:
     bool isOpen;
+    sf::Texture openTexture;
 };
 
 #endif //TERAIN_H

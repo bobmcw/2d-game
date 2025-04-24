@@ -30,7 +30,8 @@ Wall::Wall(sf::RenderWindow &window, int x, int y)
 Floor::Floor(sf::RenderWindow &window, int x, int y) : Terrain(window,x,y,"Assets/textures/floor.png") {
    this-> hasCollision = false;
 }
-Hatch::Hatch(sf::RenderWindow &window, int x, int y): Terrain(window,x,y, "Assets/textures/hatch.png") {
+Hatch::Hatch(sf::RenderWindow &window, int x, int y): Terrain(window,x,y, "Assets/textures/hatch-closed.png") {
     this->hasCollision = false;
     this->isOpen = false;
+    assert(this-> openTexture.loadFromFile("Assets/textures/stairs.png"));
 }

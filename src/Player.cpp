@@ -2,7 +2,6 @@
 
 #include <iostream>
 
-#include "fmt/args.h"
 #include "SFML/Window/Keyboard.hpp"
 #include <cmath>
 
@@ -78,7 +77,6 @@ void Player::listenForKeyPresses(std::optional<Event> event) {
     } else if (auto const e = event->getIf<Event::MouseButtonPressed>()) {
         if (e->button == Mouse::Button::Left) {
             this->shoot();
-            fmt::println("pew");
         }
     }
 }

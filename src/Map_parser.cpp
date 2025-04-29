@@ -51,6 +51,7 @@ void Map_parser::load_next_map() {
                 }
                 case 'H': {
                     this->loadedSprites.push_back(new Hatch(this->window,x,y));
+                    break;
                 }
                 default: {
                     fmt::println("invalid symbol {}",c);

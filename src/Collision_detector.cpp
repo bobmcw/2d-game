@@ -55,6 +55,10 @@ void Collision_detector::checkProjectilesCollision() {
                 if (p->sprite.getGlobalBounds().findIntersection(t->getSprite().getGlobalBounds())) {
                     this->projectile_manager.removeProjectile(p);
                 }
+            } else if (this->enemy_controller.getEnemies().empty()) {
+                if (auto* o = dynamic_cast<Openable *>(t)) {
+                    o->open();
+                }
             }
         }
         for (auto e: this->enemy_controller.getEnemies()) {

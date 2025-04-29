@@ -34,4 +34,12 @@ Hatch::Hatch(sf::RenderWindow &window, int x, int y): Terrain(window,x,y, "Asset
     this->hasCollision = false;
     this->isOpen = false;
     assert(this-> openTexture.loadFromFile("Assets/textures/stairs.png"));
+    openTexture.setRepeated(true);
 }
+void Hatch::open() {
+    if (!isOpen) {
+        this->isOpen = true;
+        this->sprite.setTexture(this->openTexture);
+    }
+}
+

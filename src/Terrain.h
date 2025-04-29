@@ -8,6 +8,12 @@
 
 #define WALL_SIZE 50;
 
+class Openable {
+public:
+    virtual void open() = 0;
+    virtual ~Openable() = default;
+};
+
 class Terrain {
 public:
     bool hasCollision;
@@ -36,9 +42,10 @@ public:
     Floor(sf::RenderWindow &window, int x, int y);
 };
 
-class Hatch : public Terrain {
+class Hatch : public Terrain, public Openable {
 public:
     Hatch(sf::RenderWindow &window, int x, int y);
+    void open() override;
 private:
     bool isOpen;
     sf::Texture openTexture;

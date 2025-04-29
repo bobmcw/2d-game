@@ -9,14 +9,14 @@ class Map_parser {
 public:
     Map_parser(sf::RenderWindow &window);
     void load_maps();
-    void load_next_map(int startX, int startY);
+    void load_next_map();
     void draw_current_map();
 
     std::vector<Terrain *> &get_loaded_sprites();
 private:
     sf::RenderWindow& window;
     std::vector<Terrain*> loadedSprites = std::vector<Terrain*>{};
-    std::vector<std::vector<std::string>> maps = std::vector<std::vector<std::string>>{};
+    std::deque<std::vector<std::string>> maps = std::deque<std::vector<std::string>>{};
 };
 
 

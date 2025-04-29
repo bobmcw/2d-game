@@ -17,9 +17,9 @@ int main()
 
     auto maploader = Map_parser(window);
     maploader.load_maps();
-    maploader.load_next_map(100,100);
+    maploader.load_next_map();
 
-    auto collision_detector = Collision_detector(player, maploader.get_loaded_sprites(),projectileManager,enemyController);
+    auto collision_detector = Collision_detector(player, maploader.get_loaded_sprites(),projectileManager,enemyController,maploader);
 
     enemyController.addEnemy(new Enemy(100,100));
     while (window.isOpen())

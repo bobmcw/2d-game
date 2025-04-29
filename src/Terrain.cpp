@@ -43,3 +43,7 @@ void Hatch::open() {
     }
 }
 
+bool Hatch::isOpened() {
+    return this->isOpen;
+}
+

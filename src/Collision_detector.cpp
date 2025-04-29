@@ -1,15 +1,16 @@
 #include "Collision_detector.h"
 
+#include <iostream>
+
 #include "fmt/args.h"
 
 Collision_detector::Collision_detector(Player &player, std::vector<Terrain *> &loaded_terrain,
                                        ProjectileManager &projectile_manager,
-                                       EnemyController &enemy_controller): player(player),
-                                                                           enemy_controller(enemy_controller),
-                                                                           loaded_terrain(loaded_terrain),
-                                                                           projectile_manager(projectile_manager) {
+                                       EnemyController &enemy_controller, Map_parser &map_parser): player(player),
+    enemy_controller(enemy_controller),
+    loaded_terrain(loaded_terrain),
+    projectile_manager(projectile_manager), map_parser(map_parser) {
 }
-
 
 void Collision_detector::checkColisionWithPlayer() {
     for (auto t: this->loaded_terrain) {
@@ -44,6 +45,14 @@ void Collision_detector::checkColisionWithPlayer() {
                     this->player.getSprite().getPosition().y
                 });
             }
+        } else if (this->player.getSprite().getGlobalBounds().findIntersection(t->getSprite().getGlobalBounds())) {
+            if (auto o = dynamic_cast<Openable *>(t)) {
+                if (o->isOpened()) {
+                    std::cout << "next lvl";
+                    this->map_parser.load_next_map();
+                    this->player.getSprite().setPosition({500,500});
+                }
+            }
         }
     }
 }
@@ -55,8 +64,10 @@ void Collision_detector::checkProjectilesCollision() {
                 if (p->sprite.getGlobalBounds().findIntersection(t->getSprite().getGlobalBounds())) {
                     this->projectile_manager.removeProjectile(p);
                 }
-            } else if (this->enemy_controller.getEnemies().empty()) {
-                if (auto* o = dynamic_cast<Openable *>(t)) {
+            }
+            //this should propably be somewhere else
+            else if (this->enemy_controller.getEnemies().empty()) {
+                if (auto *o = dynamic_cast<Openable *>(t)) {
                     o->open();
                 }
             }

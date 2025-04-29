@@ -12,6 +12,7 @@ class Openable {
 public:
     virtual void open() = 0;
     virtual ~Openable() = default;
+    virtual bool isOpened() = 0;
 };
 
 class Terrain {
@@ -46,6 +47,7 @@ class Hatch : public Terrain, public Openable {
 public:
     Hatch(sf::RenderWindow &window, int x, int y);
     void open() override;
+    bool isOpened() override;
 private:
     bool isOpen;
     sf::Texture openTexture;

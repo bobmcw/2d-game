@@ -10,7 +10,7 @@
 namespace fs = std::filesystem;
 
 Map_parser::Map_parser(sf::RenderWindow &window) : window(window) {
-    this->maps = std::vector<std::vector<std::string>>{};
+    this->maps = std::deque<std::vector<std::string>>{};
     this->loadedSprites = std::vector<Terrain*>{};
 }
 
@@ -31,9 +31,12 @@ void Map_parser::load_maps() {
     }
         fmt::println("{}",this->maps);
 }
-void Map_parser::load_next_map(int startX, int startY) {
-    auto x = startX;
-    auto y = startY;
+void Map_parser::load_next_map() {
+    this->loadedSprites.clear();
+    maps.pop_front();
+    auto startX = 100;
+    auto x = 100;
+    auto y = 100;
     auto map = this->maps.front();
     for (auto &line : map) {
         for (auto c : line) {

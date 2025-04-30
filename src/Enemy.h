@@ -8,6 +8,7 @@
 class Enemy {
 public:
     Enemy(int initialX, int initialY);
+    ~Enemy();
     sf::Sprite getSprite();
     void update();
     void MoveTowards(sf::Vector2f position);

@@ -1,5 +1,7 @@
 #include "Enemy.h"
 #include <cmath>
+#include <iostream>
+
 #include "fmt/base.h"
 #include "SFML/System/Time.hpp"
 
@@ -12,6 +14,11 @@ Enemy::Enemy(int initialX, int initialY) : sprite(this->texture) {
    this-> health = 10;
    this->dmgFlashClock = sf::Clock();
 }
+
+Enemy::~Enemy() {
+   std::cout << "enemy destroyed";
+}
+
 sf::Sprite Enemy::getSprite() {
    return this->sprite;
 }

@@ -21,7 +21,7 @@ int main()
 
     auto collision_detector = Collision_detector(player, maploader.get_loaded_sprites(),projectileManager,enemyController,maploader);
 
-    enemyController.addEnemy(new Enemy(100,100));
+    enemyController.addEnemy(std::make_unique<Enemy>(100,100));
     while (window.isOpen())
     {
         window.clear();

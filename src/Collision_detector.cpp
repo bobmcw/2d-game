@@ -72,7 +72,7 @@ void Collision_detector::checkProjectilesCollision() {
                 }
             }
         }
-        for (auto e: this->enemy_controller.getEnemies()) {
+        for (auto &e: this->enemy_controller.getEnemies()) {
             if (p->sprite.getGlobalBounds().findIntersection(e->getSprite().getGlobalBounds())) {
                 e->takeDamage();
                 this->projectile_manager.removeProjectile(p);

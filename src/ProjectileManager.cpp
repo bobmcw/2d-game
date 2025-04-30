@@ -2,26 +2,27 @@
 #include "ProjectileManager.h"
 
 ProjectileManager::ProjectileManager(sf::RenderWindow &window): window(window) {
-        this->projectiles = std::vector<Projectile*>();
+        this->projectiles = std::vector<std::unique_ptr<Projectile>>();
 }
 
 void ProjectileManager::updateProjectiles() {
-    for (auto p : this->projectiles) {
+    for (auto &p : this->projectiles) {
         p->sprite.move(p->velocity);
         this->window.draw(p->sprite);
     }
 }
 
-std::vector<Projectile *> ProjectileManager::getProjectiles() {
+std::vector<std::unique_ptr<Projectile>>& ProjectileManager::getProjectiles() {
     return this->projectiles;
 }
 
-void ProjectileManager::removeProjectile(Projectile* p) {
-    this->projectiles.erase(std::remove(this->projectiles.begin(),this->projectiles.end(),p), this->projectiles.end());
+std::__wrap_iter<std::unique_ptr<Projectile> *> ProjectileManager::removeProjectile(
+    std::vector<std::unique_ptr<Projectile> >::iterator i) {
+    return projectiles.erase(i);
 }
 
-void ProjectileManager::addProjectile(Projectile* p) {
-    this->projectiles.push_back(p);
+void ProjectileManager::addProjectile(std::unique_ptr<Projectile> p) {
+    this->projectiles.push_back(std::move(p));
 }
 
 

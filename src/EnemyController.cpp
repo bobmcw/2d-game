@@ -1,7 +1,7 @@
 #include "EnemyController.h"
 
 EnemyController::EnemyController(sf::RenderWindow &window, Player &player) : window(window), player(player) {
-    this->enemies = std::vector<std::unique_ptr<Enemy>>();
+    this->enemies = std::vector<std::unique_ptr<Enemy> >();
 }
 
 void EnemyController::addEnemy(std::unique_ptr<Enemy> e) {
@@ -17,15 +17,15 @@ void EnemyController::updateEnemies() {
     while (i != enemies.end()) {
         if ((*i)->isDead()) {
             i = enemies.erase(i);
-        }else {
-        (*i)->update();
-        (*i)->MoveTowards(this->player.getSprite().getPosition());
-        this->window.draw((*i)->getSprite());
+        } else {
+            (*i)->update();
+            (*i)->MoveTowards(this->player.getSprite().getPosition());
+            this->window.draw((*i)->getSprite());
             ++i;
         }
     }
 }
 
-std::vector<std::unique_ptr<Enemy>>& EnemyController::getEnemies()  {
+std::vector<std::unique_ptr<Enemy> > &EnemyController::getEnemies() {
     return this->enemies;
 }

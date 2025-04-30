@@ -7,12 +7,14 @@
 class ProjectileManager {
 public:
     ProjectileManager(sf::RenderWindow& window);
-    void addProjectile(Projectile* p);
+    void addProjectile(std::unique_ptr<Projectile> p);
     void updateProjectiles();
-    std::vector<Projectile*> getProjectiles();
-    void removeProjectile(Projectile* p);
+    std::vector<std::unique_ptr<Projectile>>& getProjectiles();
+
+    std::__wrap_iter<std::unique_ptr<Projectile> *> removeProjectile(
+        std::vector<std::unique_ptr<Projectile> >::iterator i);
 private:
-    std::vector<Projectile*> projectiles;
+    std::vector<std::unique_ptr<Projectile>> projectiles;
     sf::RenderWindow& window;
 };
 

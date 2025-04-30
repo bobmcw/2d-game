@@ -44,7 +44,7 @@ void Player::shoot() {
     //https://en.sfml-dev.org/forums/index.php?topic=5992.0
     auto position = this->sprite.getGlobalBounds().getCenter() + Vector2f(50 * cos(angle), 50 * sin(angle));
     auto direction = sf::Vector2f(std::cos(angle), std::sin(angle));
-    this->projectile_manager.addProjectile(new Projectile(direction, position));
+    this->projectile_manager.addProjectile(std::make_unique<Projectile>(direction, position));
 }
 
 void Player::update() {

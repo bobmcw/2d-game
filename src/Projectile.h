@@ -9,8 +9,7 @@ public:
     sf::Texture texture;
     sf::Sprite sprite;
 
-    ~Projectile() {
-    }
+    ~Projectile();
 
 private:
 };

@@ -50,7 +50,7 @@ void Collision_detector::checkColisionWithPlayer() {
                 if (o->isOpened()) {
                     std::cout << "next lvl";
                     this->map_parser.load_next_map();
-                    this->player.getSprite().setPosition({500,500});
+                    this->player.getSprite().setPosition({500, 500});
                 }
             }
         }
@@ -58,11 +58,37 @@ void Collision_detector::checkColisionWithPlayer() {
 }
 
 void Collision_detector::checkProjectilesCollision() {
-    for (auto p: this->projectile_manager.getProjectiles()) {
+    // for (auto &p: this->projectile_manager.getProjectiles()) {
+    //     for (auto t: this->loaded_terrain) {
+    //         if (t->hasCollision) {
+    //             if (p->sprite.getGlobalBounds().findIntersection(t->getSprite().getGlobalBounds())) {
+    //                 this->projectile_manager.removeProjectile(std::move(p));
+    //             }
+    //         }
+    //         //this should propably be somewhere else
+    //         else if (this->enemy_controller.getEnemies().empty()) {
+    //             if (auto *o = dynamic_cast<Openable *>(t)) {
+    //                 o->open();
+    //             }
+    //         }
+    //     }
+    //     for (auto &e: this->enemy_controller.getEnemies()) {
+    //         if (p->sprite.getGlobalBounds().findIntersection(e->getSprite().getGlobalBounds())) {
+    //             e->takeDamage();
+    //             this->projectile_manager.removeProjectile(std::move(p));
+    //         }
+    //     }
+    // }
+    auto iterator = projectile_manager.getProjectiles().begin();
+    while (iterator != projectile_manager.getProjectiles().end()) {
         for (auto t: this->loaded_terrain) {
             if (t->hasCollision) {
-                if (p->sprite.getGlobalBounds().findIntersection(t->getSprite().getGlobalBounds())) {
-                    this->projectile_manager.removeProjectile(p);
+                if ((*iterator)->sprite.getGlobalBounds().findIntersection(t->getSprite().getGlobalBounds())) {
+                    iterator = projectile_manager.removeProjectile(iterator);
+                    if (!*iterator) {
+                        return;
+                    }
+                    break;
                 }
             }
             //this should propably be somewhere else
@@ -72,11 +98,15 @@ void Collision_detector::checkProjectilesCollision() {
                 }
             }
         }
-        for (auto &e: this->enemy_controller.getEnemies()) {
-            if (p->sprite.getGlobalBounds().findIntersection(e->getSprite().getGlobalBounds())) {
-                e->takeDamage();
-                this->projectile_manager.removeProjectile(p);
+            for (auto &e: this->enemy_controller.getEnemies()) {
+                if ((*iterator)->sprite.getGlobalBounds().findIntersection(e->getSprite().getGlobalBounds())) {
+                    e->takeDamage();
+                    iterator = this->projectile_manager.removeProjectile(iterator);
+                    if (!*iterator) {
+                        return;
+                    }
+                }
             }
-        }
+    ++iterator;
     }
 }

@@ -7,9 +7,27 @@
 Collision_detector::Collision_detector(Player &player, std::vector<std::unique_ptr<Terrain> > &loaded_terrain,
                                        ProjectileManager &projectile_manager,
                                        EnemyController &enemy_controller, Map_parser &map_parser): player(player),
+    hatch(nullptr),
     enemy_controller(enemy_controller),
     loaded_terrain(loaded_terrain),
     projectile_manager(projectile_manager), map_parser(map_parser) {
+}
+
+void Collision_detector::checkIfHatchShouldOpen() {
+    if (enemy_controller.getEnemies().empty()) {
+        for (auto &t: loaded_terrain) {
+            if (auto o = dynamic_cast<Openable *>(t.get())) {
+                o->open();
+                hatch = o;
+            }
+        }
+    }
+}
+
+void Collision_detector::update() {
+   checkProjectilesCollision();
+    checkColisionWithPlayer();
+    checkIfHatchShouldOpen();
 }
 
 void Collision_detector::checkColisionWithPlayer() {
@@ -48,11 +66,14 @@ void Collision_detector::checkColisionWithPlayer() {
                     this->player.getSprite().getPosition().y
                 });
             }
-        } else if (this->player.getSprite().getGlobalBounds().findIntersection((*t).getSprite().getGlobalBounds())) {
+        }
+        //check for collision with the hatch
+        else if (this->player.getSprite().getGlobalBounds().findIntersection((*t).getSprite().getGlobalBounds())) {
             if (auto o = dynamic_cast<Openable *>(t.get())) {
                 if (o->isOpened()) {
                     std::cout << "next lvl";
                     this->map_parser.load_next_map();
+                    hatch = nullptr;
                     this->player.getSprite().setPosition({500, 500});
                 }
             }
@@ -75,12 +96,12 @@ void Collision_detector::checkProjectilesCollision() {
                 }
             }
             //this should propably be somewhere else
-            else if (this->enemy_controller.getEnemies().empty()) {
-                fmt::println("all enemies killed");
-                if (auto o = dynamic_cast<Openable *>(t.get())) {
-                    o->open();
-                }
-            }
+            // else if (this->enemy_controller.getEnemies().empty()) {
+            //     fmt::println("all enemies killed");
+            //     if (auto o = dynamic_cast<Openable *>(t.get())) {
+            //         o->open();
+            //     }
+            // }
         }
         //check for collision with enemies
         for (auto &e: this->enemy_controller.getEnemies()) {

@@ -50,4 +50,29 @@ bool Enemy::isDead() {
    return this->health<=0;
 }
 
+void Enemy::enemyAction(sf::Vector2f playerPosition) {
+  MoveTowards(playerPosition);
+}
+
+//shooting enemy
+
+Shooting_enemy::Shooting_enemy(int initialX, int initialY,ProjectileManager &projectile_manager) : Enemy(initialX,initialY), projectile_manager(projectile_manager) {
+   shootingCooldown.start();
+}
+
+void Shooting_enemy::shootTowards(sf::Vector2f position) {
+   if (shootingCooldown.getElapsedTime().asSeconds() > 0.3) {
+      auto delta = position - this->sprite.getPosition();
+      auto angle = std::atan2(delta.y,delta.x);
+      auto currentposition = this->sprite.getGlobalBounds().getCenter() + sf::Vector2f(50 * cos(angle), 50 * sin(angle));
+      auto direction = sf::Vector2f(std::cos(angle), std::sin(angle));
+      projectile_manager.addProjectile(std::make_unique<Projectile>(direction,currentposition));
+      shootingCooldown.restart();
+   }
+}
+
+void Shooting_enemy::enemyAction(sf::Vector2f playerPosition) {
+   shootTowards(playerPosition);
+}
+
 

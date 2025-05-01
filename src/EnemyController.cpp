@@ -19,7 +19,8 @@ void EnemyController::updateEnemies() {
             i = enemies.erase(i);
         } else {
             (*i)->update();
-            (*i)->MoveTowards(this->player.getSprite().getPosition());
+            (*i)->enemyAction(player.getSprite().getPosition());
+            //(*i)->MoveTowards(this->player.getSprite().getPosition());
             this->window.draw((*i)->getSprite());
             ++i;
         }

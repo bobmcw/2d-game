@@ -11,10 +11,10 @@ namespace fs = std::filesystem;
 
 Map_parser::Map_parser(sf::RenderWindow &window) : window(window) {
     this->maps = std::deque<std::vector<std::string>>{};
-    this->loadedSprites = std::vector<Terrain*>{};
+    this->loadedSprites = std::vector<std::unique_ptr<Terrain>>{};
 }
 
-std::vector<Terrain *> &Map_parser::get_loaded_sprites() {
+std::vector<std::unique_ptr<Terrain>> &Map_parser::get_loaded_sprites() {
     return this->loadedSprites;
 }
 
@@ -42,15 +42,15 @@ void Map_parser::load_next_map() {
         for (auto c : line) {
             switch (c) {
                 case 'W': {
-                    this->loadedSprites.push_back(new Wall(this->window,x,y));
+                    this->loadedSprites.push_back(std::make_unique<Wall>(this->window,x,y));
                     break;
                 }
                 case 'F': {
-                    this->loadedSprites.push_back(new Floor(this->window,x,y));
+                    this->loadedSprites.push_back(std::make_unique<Floor>(this->window,x,y));
                     break;
                 }
                 case 'H': {
-                    this->loadedSprites.push_back(new Hatch(this->window,x,y));
+                    this->loadedSprites.push_back(std::make_unique<Hatch>(this->window,x,y));
                     break;
                 }
                 default: {
@@ -64,7 +64,7 @@ void Map_parser::load_next_map() {
     }
 }
 void Map_parser::draw_current_map() {
-    for (auto t : this->loadedSprites) {
+    for (auto &t : this->loadedSprites) {
         t->draw();
     }
 }

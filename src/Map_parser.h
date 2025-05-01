@@ -12,10 +12,10 @@ public:
     void load_next_map();
     void draw_current_map();
 
-    std::vector<Terrain *> &get_loaded_sprites();
+    std::vector<std::unique_ptr<Terrain>> &get_loaded_sprites();
 private:
     sf::RenderWindow& window;
-    std::vector<Terrain*> loadedSprites = std::vector<Terrain*>{};
+    std::vector<std::unique_ptr<Terrain>> loadedSprites = std::vector<std::unique_ptr<Terrain>>{};
     std::deque<std::vector<std::string>> maps = std::deque<std::vector<std::string>>{};
 };
 

@@ -100,13 +100,6 @@ void Collision_detector::checkProjectilesCollision() {
                     break;
                 }
             }
-            //this should propably be somewhere else
-            // else if (this->enemy_controller.getEnemies().empty()) {
-            //     fmt::println("all enemies killed");
-            //     if (auto o = dynamic_cast<Openable *>(t.get())) {
-            //         o->open();
-            //     }
-            // }
         }
         //check for collision with enemies
         for (auto &e: this->enemy_controller.getEnemies()) {

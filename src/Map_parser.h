@@ -1,6 +1,7 @@
 #ifndef MAP_PARSER_H
 #define MAP_PARSER_H
 #include <vector>
+#include <deque>
 
 #include "Terrain.h"
 #include "EnemyController.h"

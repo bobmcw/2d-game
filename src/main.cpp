@@ -36,7 +36,7 @@ int main()
         //drawing objects
         maploader.draw_current_map();
         projectileManager.updateProjectiles();
-        ui.draw();
+        ui.update();
         //collision
         collision_detector.checkColisionWithPlayer();
         collision_detector.checkProjectilesCollision();

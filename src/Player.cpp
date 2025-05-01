@@ -28,6 +28,10 @@ int Player::getHp() {
     return hp;
 }
 
+void Player::takeDamage() {
+    hp -= 1;
+}
+
 void Player::drawCrosshair() {
     auto croshairVisualization = CircleShape(10);
     croshairVisualization.setFillColor(Color::Green);

@@ -27,6 +27,8 @@ public:
     void shoot();
     int getHp();
 
+    void takeDamage();
+
 private:
     PressedKeys pressedKeys;
     Sprite sprite;

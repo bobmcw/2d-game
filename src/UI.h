@@ -7,12 +7,16 @@
 class UI {
 public:
     UI(sf::RenderWindow &window, Player &player);
+
+    void update();
+
     void draw();
 private:
     RenderWindow &window;
     Player &player;
     RectangleShape hpBar;
     RectangleShape hpBarOutline;
+    int maxHp;
 };
 
 

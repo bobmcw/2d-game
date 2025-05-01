@@ -4,7 +4,7 @@
 
 #include "fmt/args.h"
 
-Collision_detector::Collision_detector(Player &player, std::vector<std::unique_ptr<Terrain>> &loaded_terrain,
+Collision_detector::Collision_detector(Player &player, std::vector<std::unique_ptr<Terrain> > &loaded_terrain,
                                        ProjectileManager &projectile_manager,
                                        EnemyController &enemy_controller, Map_parser &map_parser): player(player),
     enemy_controller(enemy_controller),
@@ -63,6 +63,7 @@ void Collision_detector::checkColisionWithPlayer() {
 void Collision_detector::checkProjectilesCollision() {
     auto iterator = projectile_manager.getProjectiles().begin();
     while (iterator != projectile_manager.getProjectiles().end()) {
+        //check for collision with terrain
         for (auto &t: this->loaded_terrain) {
             if (t->hasCollision) {
                 if ((*iterator)->sprite.getGlobalBounds().findIntersection(t->getSprite().getGlobalBounds())) {
@@ -81,15 +82,23 @@ void Collision_detector::checkProjectilesCollision() {
                 }
             }
         }
-            for (auto &e: this->enemy_controller.getEnemies()) {
-                if ((*iterator)->sprite.getGlobalBounds().findIntersection(e->getSprite().getGlobalBounds())) {
-                    e->takeDamage();
-                    iterator = this->projectile_manager.removeProjectile(iterator);
-                    if (!*iterator) {
-                        return;
-                    }
+        //check for collision with enemies
+        for (auto &e: this->enemy_controller.getEnemies()) {
+            if ((*iterator)->sprite.getGlobalBounds().findIntersection(e->getSprite().getGlobalBounds())) {
+                e->takeDamage();
+                iterator = this->projectile_manager.removeProjectile(iterator);
+                if (!*iterator) {
+                    return;
                 }
             }
-    ++iterator;
+        }
+        if ((*iterator)->sprite.getGlobalBounds().findIntersection(player.getSprite().getGlobalBounds())) {
+            player.takeDamage();
+            iterator = this->projectile_manager.removeProjectile(iterator);
+            if (!*iterator) {
+                return;
+            }
+        }
+        ++iterator;
     }
 }

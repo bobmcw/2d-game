@@ -11,7 +11,7 @@ public:
     void updateProjectiles();
     std::vector<std::unique_ptr<Projectile>>& getProjectiles();
 
-    std::__wrap_iter<std::unique_ptr<Projectile> *> removeProjectile(
+    std::vector<std::unique_ptr<Projectile>>::iterator removeProjectile(
         std::vector<std::unique_ptr<Projectile> >::iterator i);
 private:
     std::vector<std::unique_ptr<Projectile>> projectiles;

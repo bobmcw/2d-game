@@ -16,7 +16,7 @@ std::vector<std::unique_ptr<Projectile>>& ProjectileManager::getProjectiles() {
     return this->projectiles;
 }
 
-std::__wrap_iter<std::unique_ptr<Projectile> *> ProjectileManager::removeProjectile(
+std::vector<std::unique_ptr<Projectile>>::iterator ProjectileManager::removeProjectile(
     std::vector<std::unique_ptr<Projectile> >::iterator i) {
     return projectiles.erase(i);
 }

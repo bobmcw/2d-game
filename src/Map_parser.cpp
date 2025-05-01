@@ -84,8 +84,7 @@ void Map_parser::load_next_map() {
         x = startX;
         y += 50;
     }
-    for (auto &v: enemyLayouts) {
-        for (auto &s: v) {
+        for (auto &s: enemyLayouts.front()) {
             //split by space
             auto vals = std::vector<std::string>();
             std::istringstream stream(s);
@@ -103,7 +102,6 @@ void Map_parser::load_next_map() {
                 } else {
                     fmt::println("invalid enemy type: {}", vals.front());;
                 }
-            }
         }
     }
 }

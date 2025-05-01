@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <deque>
 
 #include "EnemyController.h"
 #include "Terrain.h"

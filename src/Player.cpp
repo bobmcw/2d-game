@@ -29,7 +29,10 @@ int Player::getHp() {
 }
 
 void Player::takeDamage() {
-    hp -= 1;
+    if (eyeFrameClock.isRunning() && eyeFrameClock.getElapsedTime().asSeconds() > 0.75) {
+        hp -= 1;
+        eyeFrameClock.restart();
+    }
 }
 
 void Player::drawCrosshair() {

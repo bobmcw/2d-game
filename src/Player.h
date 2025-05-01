@@ -37,6 +37,7 @@ private:
     ProjectileManager& projectile_manager;
     Vector2f velocity;
     int hp;
+    sf::Clock eyeFrameClock;
 };
 
 

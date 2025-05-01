@@ -79,6 +79,11 @@ void Collision_detector::checkColisionWithPlayer() {
             }
         }
     }
+    for (auto &e : enemy_controller.getEnemies()) {
+        if (player.getSprite().getGlobalBounds().findIntersection(e->getSprite().getGlobalBounds())) {
+            player.takeDamage();
+        }
+    }
 }
 
 void Collision_detector::checkProjectilesCollision() {

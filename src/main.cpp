@@ -4,7 +4,7 @@
 #include "EnemyController.h"
 #include "Map_parser.h"
 #include "Player.h"
-#include "Terrain.h"
+#include "UI.h"
 
 int main()
 {
@@ -14,6 +14,7 @@ int main()
     auto projectileManager = ProjectileManager(window);
     auto player = Player(window,projectileManager);
     auto enemyController = EnemyController(window, player);
+    auto ui = UI(window,player);
 
     auto maploader = Map_parser(window,enemyController,projectileManager);
     maploader.load_maps();
@@ -35,6 +36,7 @@ int main()
         //drawing objects
         maploader.draw_current_map();
         projectileManager.updateProjectiles();
+        ui.draw();
         //collision
         collision_detector.checkColisionWithPlayer();
         collision_detector.checkProjectilesCollision();

@@ -25,6 +25,7 @@ public:
     Sprite& getSprite();
     void drawCrosshair();
     void shoot();
+    int getHp();
 
 private:
     PressedKeys pressedKeys;
@@ -33,6 +34,7 @@ private:
     RenderWindow& window;
     ProjectileManager& projectile_manager;
     Vector2f velocity;
+    int hp;
 };
 
 

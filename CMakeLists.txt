@@ -40,6 +40,8 @@ add_executable(main src/main.cpp
         src/Enemy.cpp
         src/Enemy.h
         src/EnemyController.cpp
-        src/EnemyController.h)
+        src/EnemyController.h
+        src/UI.cpp
+        src/UI.h)
 #target_compile_features(main PRIVATE cxx_std_17)
 target_link_libraries(main PRIVATE SFML::Graphics fmt)

@@ -8,7 +8,7 @@
 
 class Enemy {
 public:
-    Enemy(int initialX, int initialY);
+    Enemy(float initialX, float initialY);
 
     ~Enemy();
 
@@ -37,7 +37,7 @@ protected:
 
 class Shooting_enemy : public Enemy {
 public:
-    Shooting_enemy(int initialX, int initialY,ProjectileManager &projectile_manager);
+    Shooting_enemy(float initialX, float initialY,ProjectileManager &projectile_manager);
 
     void shootTowards(sf::Vector2f position);
 

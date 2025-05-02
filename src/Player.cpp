@@ -20,6 +20,7 @@ Player::Player(RenderWindow &window, ProjectileManager &projectile_manager)
     this->sprite.setTextureRect(sf::IntRect({0, 0}, {50, 50}));
     this->window.draw(this->sprite);
     this->velocity = Vector2f(0, 0);
+    lmbPressedAndReleased = true;
 }
 
 Sprite &Player::getSprite() {
@@ -62,6 +63,7 @@ void Player::shoot() {
 void Player::update() {
     this->handleMove();
     this->drawCrosshair();
+    handleShooting();
     this->draw();
 }
 
@@ -88,9 +90,27 @@ void Player::listenForKeyPresses(std::optional<Event> event) {
         }
     } else if (auto const e = event->getIf<Event::MouseButtonPressed>()) {
         if (e->button == Mouse::Button::Left) {
-            this->shoot();
+            pressedKeys.LMB = true;
         }
     }
+    else if (auto const e = event->getIf<Event::MouseButtonReleased>()) {
+        if (e->button == Mouse::Button::Left) {
+            lmbPressedAndReleased = true;
+            pressedKeys.LMB = false;
+        }
+    }
+}
+
+void Player::handleShooting() {
+   if (pressedKeys.LMB) {
+       if (weapon.isAutomatic) {
+           shoot();
+       }
+       else if (lmbPressedAndReleased) {
+          shoot();
+          lmbPressedAndReleased = false;
+       }
+   }
 }
 
 void Player::handleMove() {

@@ -14,6 +14,7 @@ struct PressedKeys {
     bool S;
     bool A;
     bool D;
+    bool LMB;
 };
 
 class Player {
@@ -21,6 +22,9 @@ public:
     Player(RenderWindow& window, ProjectileManager& projectile_manager);
     void handleMove();
     void listenForKeyPresses(std::optional<Event> event);
+
+    void handleShooting();
+
     void draw();
     void update();
     Sprite& getSprite();
@@ -31,6 +35,7 @@ public:
     void takeDamage();
 
 private:
+    bool lmbPressedAndReleased;
     Weapon weapon;
     PressedKeys pressedKeys;
     Sprite sprite;

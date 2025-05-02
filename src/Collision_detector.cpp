@@ -13,7 +13,7 @@ Collision_detector::Collision_detector(Player &player, std::vector<std::unique_p
     projectile_manager(projectile_manager), map_parser(map_parser) {
 }
 
-void Collision_detector::checkIfHatchShouldOpen() {
+void Collision_detector::handleEndOfLvl() {
     if (enemy_controller.getEnemies().empty()) {
         for (auto &t: loaded_terrain) {
             if (auto o = dynamic_cast<Openable *>(t.get())) {
@@ -27,7 +27,7 @@ void Collision_detector::checkIfHatchShouldOpen() {
 void Collision_detector::update() {
    checkProjectilesCollision();
     checkColisionWithPlayer();
-    checkIfHatchShouldOpen();
+    handleEndOfLvl();
 }
 
 void Collision_detector::checkColisionWithPlayer() {

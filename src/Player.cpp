@@ -5,10 +5,11 @@
 #include "SFML/Window/Keyboard.hpp"
 #include <cmath>
 
+
 using namespace sf;
 
 Player::Player(RenderWindow &window, ProjectileManager &projectile_manager)
-    : sprite(this->texture), window(window), projectile_manager(projectile_manager),hp(10) {
+    : sprite(this->texture), window(window), projectile_manager(projectile_manager),hp(10),weapon(Weapon(weaponType::pistol,projectile_manager)) {
     this->pressedKeys = PressedKeys();
     this->texture = Texture();
     if (!this->texture.loadFromFile("Assets/textures/player.png")) {
@@ -54,7 +55,8 @@ void Player::shoot() {
     //https://en.sfml-dev.org/forums/index.php?topic=5992.0
     auto position = this->sprite.getGlobalBounds().getCenter() + Vector2f(50 * cos(angle), 50 * sin(angle));
     auto direction = sf::Vector2f(std::cos(angle), std::sin(angle));
-    this->projectile_manager.addProjectile(std::make_unique<Projectile>(direction, position));
+    weapon.shoot(direction,position);
+    //this->projectile_manager.addProjectile(std::make_unique<Projectile>(direction, position));
 }
 
 void Player::update() {

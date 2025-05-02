@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include "ProjectileManager.h"
+#include "Weapon.h"
 #include "SFML/Graphics/CircleShape.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
 #include "SFML/Graphics/Sprite.hpp"
@@ -30,6 +31,7 @@ public:
     void takeDamage();
 
 private:
+    Weapon weapon;
     PressedKeys pressedKeys;
     Sprite sprite;
     Texture texture;

@@ -26,3 +26,4 @@ void Weapon::shoot(sf::Vector2f direction, sf::Vector2f position) {
    }
 }
 
+

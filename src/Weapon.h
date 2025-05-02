@@ -16,6 +16,7 @@ class Weapon {
 public:
     Weapon(weaponType type, ProjectileManager &projectile_manager);
     void shoot(sf::Vector2f direction, sf::Vector2f position);
+    bool isAutomatic;
 
 private:
     ProjectileManager &projectile_manager;
@@ -24,7 +25,6 @@ private:
     sf::Clock shotCooldown;
     int maxAmmo;
     int ammo;
-    bool isAutomatic;
     int dmg;
     float firerate;
     float spread;

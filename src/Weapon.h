@@ -21,6 +21,7 @@ private:
     ProjectileManager &projectile_manager;
     sf::Texture texture;
     sf::Sprite sprite;
+    sf::Clock shotCooldown;
     int maxAmmo;
     int ammo;
     bool isAutomatic;

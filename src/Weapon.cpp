@@ -3,8 +3,9 @@
 #include "fmt/compile.h"
 #include "SFML/Graphics/Texture.hpp"
 
-Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): sprite(texture), projectile_manager(projectile_manager) {
+Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): sprite(texture), projectile_manager(projectile_manager),shotCooldown(sf::Clock()) {
    texture = sf::Texture();
+   shotCooldown.start();
    switch (type) {
       case weaponType::pistol: {
          maxAmmo = 12;
@@ -19,6 +20,9 @@ Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): sprite(t
    assert(texture.loadFromFile("./Assets/textures/bullet.png"));
 }
 void Weapon::shoot(sf::Vector2f direction, sf::Vector2f position) {
-   projectile_manager.addProjectile(std::make_unique<Projectile>(direction,position));
+   if (shotCooldown.getElapsedTime().asSeconds() > firerate) {
+      projectile_manager.addProjectile(std::make_unique<Projectile>(direction,position));
+      shotCooldown.restart();
+   }
 }
 

@@ -1,17 +1,16 @@
 #include "Collision_detector.h"
 
 #include <iostream>
-
+#include <random>
 #include "fmt/args.h"
 
 Collision_detector::Collision_detector(Player &player, std::vector<std::unique_ptr<Terrain> > &loaded_terrain,
                                        ProjectileManager &projectile_manager,
                                        EnemyController &enemy_controller, Map_parser &map_parser): player(player),
-    hatch(nullptr),
+    hatch(nullptr), reward(Weapon( std::ref(projectile_manager))),
     enemy_controller(enemy_controller),
     loaded_terrain(loaded_terrain),
-    projectile_manager(projectile_manager), map_parser(map_parser) {
-}
+    projectile_manager(projectile_manager), map_parser(map_parser) {}
 
 void Collision_detector::handleEndOfLvl() {
     if (enemy_controller.getEnemies().empty()) {
@@ -21,11 +20,17 @@ void Collision_detector::handleEndOfLvl() {
                 hatch = o;
             }
         }
+        spawnReward();
     }
 }
 
+void Collision_detector::spawnReward() {
+    map_parser.draw(reward.getSprite());
+}
+
+
 void Collision_detector::update() {
-   checkProjectilesCollision();
+    checkProjectilesCollision();
     checkColisionWithPlayer();
     handleEndOfLvl();
 }
@@ -79,7 +84,7 @@ void Collision_detector::checkColisionWithPlayer() {
             }
         }
     }
-    for (auto &e : enemy_controller.getEnemies()) {
+    for (auto &e: enemy_controller.getEnemies()) {
         if (player.getSprite().getGlobalBounds().findIntersection(e->getSprite().getGlobalBounds())) {
             player.takeDamage();
         }

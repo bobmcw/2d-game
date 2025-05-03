@@ -15,13 +15,17 @@ enum class weaponType {
 class Weapon {
 public:
     Weapon(weaponType type, ProjectileManager &projectile_manager);
+    Weapon(ProjectileManager &projectile_manager);
     void shoot(sf::Vector2f direction, sf::Vector2f position);
     bool isAutomatic;
 
+    sf::Sprite &getSprite();
+    weaponType randomWeaponType();
+
 private:
-    ProjectileManager &projectile_manager;
-    sf::Texture texture;
+    std::reference_wrapper<ProjectileManager> projectile_manager;
     sf::Sprite sprite;
+    sf::Texture texture;
     sf::Clock shotCooldown;
     int maxAmmo;
     int ammo;

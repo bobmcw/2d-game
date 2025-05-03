@@ -12,6 +12,8 @@ public:
 
     void handleEndOfLvl();
 
+    void spawnReward();
+
     void update();
 
     void checkColisionWithPlayer();
@@ -23,6 +25,7 @@ private:
     EnemyController &enemy_controller;
     Map_parser &map_parser;
     Openable *hatch;
+    Weapon reward;
 };
 
 

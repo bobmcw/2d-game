@@ -18,6 +18,8 @@ public:
     void draw_current_map();
 
     std::vector<std::unique_ptr<Terrain>> &get_loaded_sprites();
+
+    void draw(const Drawable &drawable) const;
 private:
     sf::RenderWindow& window;
     std::vector<std::unique_ptr<Terrain>> loadedSprites = std::vector<std::unique_ptr<Terrain>>{};

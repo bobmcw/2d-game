@@ -23,6 +23,10 @@ std::vector<std::unique_ptr<Terrain> > &Map_parser::get_loaded_sprites() {
     return loadedSprites;
 }
 
+void Map_parser::draw(const Drawable &drawable) const {
+    window.draw(drawable);
+}
+
 
 void Map_parser::load_maps() {
     for (auto const &mapFile: fs::directory_iterator(fs::path("./Assets/maps"))) {

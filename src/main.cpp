@@ -38,8 +38,6 @@ int main()
         projectileManager.updateProjectiles();
         ui.update();
         //collision
-        // collision_detector.checkColisionWithPlayer();
-        // collision_detector.checkProjectilesCollision();
         collision_detector.update();
         //updating objects
         player.update();

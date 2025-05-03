@@ -10,7 +10,7 @@ Collision_detector::Collision_detector(Player &player, std::vector<std::unique_p
     hatch(nullptr), reward(Weapon( std::ref(projectile_manager))),
     enemy_controller(enemy_controller),
     loaded_terrain(loaded_terrain),
-    projectile_manager(projectile_manager), map_parser(map_parser) {}
+    projectile_manager(projectile_manager), map_parser(map_parser), rewardPickedUp(false) {}
 
 void Collision_detector::handleEndOfLvl() {
     if (enemy_controller.getEnemies().empty()) {
@@ -21,11 +21,21 @@ void Collision_detector::handleEndOfLvl() {
             }
         }
         spawnReward();
+        checkRewardCollision();
     }
 }
 
 void Collision_detector::spawnReward() {
-    map_parser.draw(reward.getSprite());
+    if (!rewardPickedUp) {
+        map_parser.draw(reward.getSprite());
+    }
+}
+
+void Collision_detector::checkRewardCollision() {
+   if (reward.getSprite().getGlobalBounds().findIntersection(player.getSprite().getGlobalBounds())) {
+       player.setWeapon(reward);
+       rewardPickedUp = true;
+   }
 }
 
 

@@ -14,6 +14,8 @@ public:
 
     void spawnReward();
 
+    void checkRewardCollision();
+
     void update();
 
     void checkColisionWithPlayer();
@@ -26,6 +28,7 @@ private:
     Map_parser &map_parser;
     Openable *hatch;
     Weapon reward;
+    bool rewardPickedUp;
 };
 
 

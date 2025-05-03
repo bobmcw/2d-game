@@ -33,6 +33,7 @@ public:
     int getHp();
 
     void takeDamage();
+    void setWeapon(Weapon w);
 
 private:
     bool lmbPressedAndReleased;

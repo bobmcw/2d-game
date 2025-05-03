@@ -2,7 +2,6 @@
 
 #include <random>
 
-#include "fmt/compile.h"
 #include "SFML/Graphics/Texture.hpp"
 
 Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projectile_manager(
@@ -47,11 +46,10 @@ Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projecti
         }
     }
     sprite = sf::Sprite(texture);
-    sprite.setPosition({10, 500});
+    sprite.setPosition({500, 500});
 }
 
-Weapon::Weapon(ProjectileManager &projectile_manager): Weapon(randomWeaponType(), projectile_manager) {
-}
+Weapon::Weapon(ProjectileManager &projectile_manager): Weapon(randomWeaponType(), projectile_manager) {}
 
 void Weapon::shoot(sf::Vector2f direction, sf::Vector2f position) {
     if (shotCooldown.getElapsedTime().asSeconds() > firerate) {

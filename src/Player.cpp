@@ -4,6 +4,7 @@
 
 #include "SFML/Window/Keyboard.hpp"
 #include <cmath>
+#include <utility>
 
 
 using namespace sf;
@@ -35,6 +36,10 @@ void Player::takeDamage() {
         hp -= 1;
         eyeFrameClock.restart();
     }
+}
+
+void Player::setWeapon(Weapon w) {
+    this->weapon = std::move(w);
 }
 
 void Player::drawCrosshair() {

@@ -10,12 +10,21 @@ public:
 
     void update();
 
+    void updateHPBar();
+
+    void updateWeapon();
+
     void draw();
 private:
     RenderWindow &window;
     Player &player;
     RectangleShape hpBar;
     RectangleShape hpBarOutline;
+    RectangleShape weaponContainer;
+    int ammoCount;
+    int maxAmmo;
+    Text ammoText;
+    Font font;
     int maxHp;
 };
 

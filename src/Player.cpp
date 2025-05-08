@@ -10,7 +10,8 @@
 using namespace sf;
 
 Player::Player(RenderWindow &window, ProjectileManager &projectile_manager)
-    : sprite(this->texture), window(window), projectile_manager(projectile_manager),hp(10),weapon(Weapon(weaponType::pistol,projectile_manager)) {
+    : sprite(this->texture), window(window), projectile_manager(projectile_manager), hp(10),
+      weapon(Weapon(weaponType::pistol, projectile_manager)) {
     this->pressedKeys = PressedKeys();
     this->texture = Texture();
     if (!this->texture.loadFromFile("Assets/textures/player.png")) {
@@ -27,6 +28,7 @@ Player::Player(RenderWindow &window, ProjectileManager &projectile_manager)
 Sprite &Player::getSprite() {
     return this->sprite;
 }
+
 int Player::getHp() {
     return hp;
 }
@@ -65,7 +67,7 @@ void Player::shoot() {
     //https://en.sfml-dev.org/forums/index.php?topic=5992.0
     auto position = this->sprite.getGlobalBounds().getCenter() + Vector2f(50 * cos(angle), 50 * sin(angle));
     auto direction = sf::Vector2f(std::cos(angle), std::sin(angle));
-    weapon.shoot(direction,position);
+    weapon.shoot(direction, position);
     //this->projectile_manager.addProjectile(std::make_unique<Projectile>(direction, position));
 }
 
@@ -101,8 +103,7 @@ void Player::listenForKeyPresses(std::optional<Event> event) {
         if (e->button == Mouse::Button::Left) {
             pressedKeys.LMB = true;
         }
-    }
-    else if (auto const e = event->getIf<Event::MouseButtonReleased>()) {
+    } else if (auto const e = event->getIf<Event::MouseButtonReleased>()) {
         if (e->button == Mouse::Button::Left) {
             lmbPressedAndReleased = true;
             pressedKeys.LMB = false;
@@ -111,15 +112,14 @@ void Player::listenForKeyPresses(std::optional<Event> event) {
 }
 
 void Player::handleShooting() {
-   if (pressedKeys.LMB) {
-       if (weapon.isAutomatic) {
-           shoot();
-       }
-       else if (lmbPressedAndReleased) {
-          shoot();
-          lmbPressedAndReleased = false;
-       }
-   }
+    if (pressedKeys.LMB) {
+        if (weapon.isAutomatic) {
+            shoot();
+        } else if (lmbPressedAndReleased) {
+            shoot();
+            lmbPressedAndReleased = false;
+        }
+    }
 }
 
 void Player::handleMove() {

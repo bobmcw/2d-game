@@ -19,21 +19,31 @@ struct PressedKeys {
 
 class Player {
 public:
-    Player(RenderWindow& window, ProjectileManager& projectile_manager);
+    Player(RenderWindow &window, ProjectileManager &projectile_manager);
+
     void handleMove();
+
     void listenForKeyPresses(std::optional<Event> event);
 
     void handleShooting();
 
     void draw();
+
     void update();
-    Sprite& getSprite();
+
+    Sprite &getSprite();
+
     void drawCrosshair();
+
     void shoot();
+
     int getHp();
 
     void takeDamage();
+
     void setWeapon(Weapon w);
+
+    Weapon &getWeapon();
 
 private:
     bool lmbPressedAndReleased;
@@ -41,13 +51,12 @@ private:
     PressedKeys pressedKeys;
     Sprite sprite;
     Texture texture;
-    RenderWindow& window;
-    ProjectileManager& projectile_manager;
+    RenderWindow &window;
+    ProjectileManager &projectile_manager;
     Vector2f velocity;
     int hp;
     sf::Clock eyeFrameClock;
 };
-
 
 
 #endif //PLAYER_H

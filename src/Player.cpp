@@ -42,6 +42,10 @@ void Player::setWeapon(Weapon w) {
     this->weapon = std::move(w);
 }
 
+Weapon &Player::getWeapon() {
+    return weapon;
+}
+
 void Player::drawCrosshair() {
     auto croshairVisualization = CircleShape(10);
     croshairVisualization.setFillColor(Color::Green);

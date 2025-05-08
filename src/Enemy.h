@@ -48,5 +48,12 @@ private:
     sf::Clock shootingCooldown;
 };
 
+class Boss : public Enemy {
+public:
+    Boss(float initialX, float initialY,ProjectileManager &projectile_manager);
+    void enemyAction(sf::Vector2f playerPosition) override;
+private:
+    ProjectileManager& projectile_manager;
+};
 
 #endif //ENEMY_H

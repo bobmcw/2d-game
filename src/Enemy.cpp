@@ -5,15 +5,10 @@
 #include "fmt/base.h"
 #include "SFML/System/Time.hpp"
 
-Enemy::Enemy(float initialX, float initialY) : sprite(this->texture) {
-   this->x = initialX;
-   this->y = initialY;
-   this->texture = sf::Texture();
+Enemy::Enemy(float initialX, float initialY) : sprite(this->texture), x(initialX), y(initialY), texture(sf::Texture()),health(10), dmgFlashClock(sf::Clock()) {
    assert(texture.loadFromFile("Assets/textures/enemy.png"));
    this->sprite = sf::Sprite(this->texture);
    this->sprite.setPosition({initialX,initialY});
-   this-> health = 10;
-   this->dmgFlashClock = sf::Clock();
 }
 
 Enemy::~Enemy() {
@@ -75,5 +70,15 @@ void Shooting_enemy::shootTowards(sf::Vector2f position) {
 void Shooting_enemy::enemyAction(sf::Vector2f playerPosition) {
    shootTowards(playerPosition);
 }
+
+//Boss
+
+Boss::Boss(float initialX, float initialY, ProjectileManager &projectile_manager) : Enemy(initialX,initialY),projectile_manager(projectile_manager) {
+
+}
+void Boss::enemyAction(sf::Vector2f playerPosition) {
+
+}
+
 
 

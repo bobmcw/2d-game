@@ -7,7 +7,7 @@
 Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projectile_manager(
                                                                             std::ref(projectile_manager)),
                                                                         sprite(texture),
-                                                                        shotCooldown(sf::Clock()) {
+                                                                        shotCooldown(sf::Clock()), reloading(false) {
     shotCooldown.start();
     texture = sf::Texture();
     switch (type) {
@@ -63,11 +63,25 @@ void Weapon::shoot(sf::Vector2f direction, sf::Vector2f position) {
     }
 }
 
+void Weapon::reload() {
+    if (!reloadTimer.isRunning()) {
+        reloadTimer.start();
+        reloading = true;
+    } else if (reloadTimer.getElapsedTime().asSeconds() > 5) {
+        reloadTimer.reset();
+        ammo = maxAmmo;
+        reloading = false;
+    }
+}
+
 sf::Sprite &Weapon::getSprite() {
     return sprite;
 }
-int Weapon::getAmmo() {
+int Weapon::getAmmo() const {
     return ammo;
+}
+bool Weapon::isReloading() const {
+    return reloading;
 }
 
 

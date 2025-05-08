@@ -17,11 +17,16 @@ public:
     Weapon(weaponType type, ProjectileManager &projectile_manager);
     Weapon(ProjectileManager &projectile_manager);
     void shoot(sf::Vector2f direction, sf::Vector2f position);
+
+    void reload();
+
     bool isAutomatic;
 
     sf::Sprite &getSprite();
 
-    int getAmmo();
+    int getAmmo() const;
+
+    bool isReloading() const;
 
     weaponType randomWeaponType();
 
@@ -30,11 +35,13 @@ private:
     sf::Sprite sprite;
     sf::Texture texture;
     sf::Clock shotCooldown;
+    sf::Clock reloadTimer;
     int maxAmmo;
     int ammo;
     int dmg;
     float firerate;
     float spread;
+    bool reloading;
 };
 
 

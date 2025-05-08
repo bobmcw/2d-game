@@ -13,6 +13,7 @@ Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projecti
     switch (type) {
         case weaponType::pistol: {
             maxAmmo = 12;
+            ammo = 12;
             isAutomatic = false;
             dmg = 1;
             firerate = 0.3;
@@ -22,6 +23,7 @@ Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projecti
         }
         case weaponType::ak47: {
             maxAmmo = 30;
+            ammo = 30;
             isAutomatic = true;
             dmg = 3;
             firerate = 0.1;
@@ -30,6 +32,7 @@ Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projecti
         }
         case weaponType::uzi: {
             maxAmmo = 15;
+            ammo = 15;
             isAutomatic = true;
             dmg = 1;
             firerate = 0.05;
@@ -38,6 +41,7 @@ Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projecti
         }
         case weaponType::ppbizon: {
             maxAmmo = 64;
+            ammo = 64;
             isAutomatic = true;
             dmg = 1;
             firerate = 0.1;
@@ -52,15 +56,20 @@ Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projecti
 Weapon::Weapon(ProjectileManager &projectile_manager): Weapon(randomWeaponType(), projectile_manager) {}
 
 void Weapon::shoot(sf::Vector2f direction, sf::Vector2f position) {
-    if (shotCooldown.getElapsedTime().asSeconds() > firerate) {
+    if (shotCooldown.getElapsedTime().asSeconds() > firerate && ammo > 0) {
         projectile_manager.get().addProjectile(std::make_unique<Projectile>(direction, position));
         shotCooldown.restart();
+        ammo--;
     }
 }
 
 sf::Sprite &Weapon::getSprite() {
     return sprite;
 }
+int Weapon::getAmmo() {
+    return ammo;
+}
+
 
 weaponType Weapon::randomWeaponType() {
     auto types = std::vector<weaponType>{weaponType::ak47, weaponType::pistol, weaponType::ppbizon, weaponType::uzi};

@@ -20,6 +20,9 @@ public:
     bool isAutomatic;
 
     sf::Sprite &getSprite();
+
+    int getAmmo();
+
     weaponType randomWeaponType();
 
 private:

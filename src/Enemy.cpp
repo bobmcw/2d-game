@@ -12,7 +12,6 @@ Enemy::Enemy(float initialX, float initialY) : sprite(this->texture), x(initialX
 }
 
 Enemy::~Enemy() {
-   std::cout << "enemy destroyed";
 }
 
 sf::Sprite Enemy::getSprite() {

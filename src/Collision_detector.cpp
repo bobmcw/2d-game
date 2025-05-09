@@ -52,7 +52,6 @@ void Collision_detector::checkColisionWithPlayer() {
         }
         if (this->player.getSprite().getGlobalBounds().findIntersection((*t).getSprite().getGlobalBounds()) && (*t).
             hasCollision) {
-            fmt::println("intersection");
             //from bottom
             if (this->player.getSprite().getPosition().y > (*t).getSprite().getPosition().y) {
                 player.getSprite().setPosition({

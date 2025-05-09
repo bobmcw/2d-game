@@ -17,5 +17,5 @@ Projectile::Projectile(sf::Vector2f velocity, sf::Vector2f initialPosition): spr
 }
 
 Projectile::~Projectile() {
-    std::cout << "projectile destroyed";
+    //std::cout << "projectile destroyed";
 }

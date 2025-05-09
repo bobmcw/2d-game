@@ -8,8 +8,9 @@
 Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projectile_manager(
                                                                             std::ref(projectile_manager)),
                                                                         sprite(texture),
-                                                                        shotCooldown(sf::Clock()), reloading(false) {
+                                                                        shotCooldown(sf::Clock()), reloading(false), reloadTimer(sf::Clock()) {
     shotCooldown.start();
+    reloadTimer.reset();
     texture = sf::Texture();
     switch (type) {
         case weaponType::pistol: {

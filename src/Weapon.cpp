@@ -2,6 +2,7 @@
 
 #include <random>
 
+#include "fmt/base.h"
 #include "SFML/Graphics/Texture.hpp"
 
 Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projectile_manager(
@@ -67,10 +68,11 @@ void Weapon::reload() {
     if (!reloadTimer.isRunning()) {
         reloadTimer.start();
         reloading = true;
-    } else if (reloadTimer.getElapsedTime().asSeconds() > 5) {
+    } else if (reloadTimer.getElapsedTime().asSeconds() > 2) {
         reloadTimer.reset();
         ammo = maxAmmo;
         reloading = false;
+        fmt::println("reloaded");
     }
 }
 
@@ -83,8 +85,6 @@ int Weapon::getAmmo() const {
 bool Weapon::isReloading() const {
     return reloading;
 }
-
-
 weaponType Weapon::randomWeaponType() {
     auto types = std::vector<weaponType>{weaponType::ak47, weaponType::pistol, weaponType::ppbizon, weaponType::uzi};
     static std::random_device rd;

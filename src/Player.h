@@ -37,6 +37,8 @@ public:
 
     void shoot();
 
+    void handleReload();
+
     int getHp();
 
     void takeDamage();

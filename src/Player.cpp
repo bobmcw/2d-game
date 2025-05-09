@@ -67,12 +67,21 @@ void Player::shoot() {
     //https://en.sfml-dev.org/forums/index.php?topic=5992.0
     auto position = this->sprite.getGlobalBounds().getCenter() + Vector2f(50 * cos(angle), 50 * sin(angle));
     auto direction = sf::Vector2f(std::cos(angle), std::sin(angle));
-    weapon.shoot(direction, position);
+    if (!weapon.isReloading()) {
+        weapon.shoot(direction, position);
+    }
     //this->projectile_manager.addProjectile(std::make_unique<Projectile>(direction, position));
+}
+
+void Player::handleReload() {
+   if (weapon.isReloading()) {
+       weapon.reload();
+   }
 }
 
 void Player::update() {
     this->handleMove();
+    handleReload();
     this->drawCrosshair();
     handleShooting();
     this->draw();
@@ -88,6 +97,8 @@ void Player::listenForKeyPresses(std::optional<Event> event) {
             this->pressedKeys.A = true;
         } else if (e->code == Keyboard::Key::D) {
             this->pressedKeys.D = true;
+        } else if (e->code == Keyboard::Key::R) {
+            weapon.reload();
         }
     } else if (auto const e = event->getIf<Event::KeyReleased>()) {
         if (e->code == Keyboard::Key::W) {

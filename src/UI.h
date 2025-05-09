@@ -22,7 +22,6 @@ private:
     RectangleShape hpBarOutline;
     RectangleShape weaponContainer;
     int ammoCount;
-    int maxAmmo;
     Text ammoText;
     Font font;
     int maxHp;

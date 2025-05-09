@@ -26,6 +26,8 @@ public:
 
     int getAmmo() const;
 
+    int getMaxAmmo() const;
+
     bool isReloading() const;
 
     weaponType randomWeaponType();

@@ -82,6 +82,9 @@ sf::Sprite &Weapon::getSprite() {
 int Weapon::getAmmo() const {
     return ammo;
 }
+int Weapon::getMaxAmmo() const {
+    return maxAmmo;
+}
 bool Weapon::isReloading() const {
     return reloading;
 }

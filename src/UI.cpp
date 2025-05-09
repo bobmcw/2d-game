@@ -6,7 +6,6 @@ UI::UI(sf::RenderWindow &window, Player &player) : window(window), player(player
                                                    hpBarOutline({210, 30}), weaponContainer({75, 50}),
                                                    font("Assets/ByteBounce.ttf"),
                                                    ammoCount(player.getWeapon().getAmmo()),
-                                                   maxAmmo(player.getWeapon().getAmmo()),
                                                    ammoText(font) {
     hpBar.setFillColor(sf::Color::Red);
     hpBarOutline.setFillColor(sf::Color::Black);
@@ -44,7 +43,7 @@ void UI::updateWeapon() {
     player.getWeapon().getSprite().setPosition({
         weaponContainer.getPosition().x + weaponContainer.getSize().x / 4, weaponContainer.getPosition().y
     });
-    ammoText.setString(fmt::format("{} / {}", player.getWeapon().getAmmo(), maxAmmo));
+    ammoText.setString(fmt::format("{} / {}", player.getWeapon().getAmmo(), player.getWeapon().getMaxAmmo()));
     window.draw(weaponContainer);
     window.draw(ammoText);
     window.draw(player.getWeapon().getSprite());

@@ -10,7 +10,7 @@
 using namespace sf;
 
 Player::Player(RenderWindow &window, ProjectileManager &projectile_manager)
-    : sprite(this->texture), window(window), projectile_manager(projectile_manager), hp(10),
+    : sprite(this->texture), window(window), projectile_manager(projectile_manager), hp(10), font("Assets/ByteBounce.ttf"), reloadText(font),
       weapon(Weapon(weaponType::pistol, projectile_manager)) {
     this->pressedKeys = PressedKeys();
     this->texture = Texture();
@@ -23,6 +23,8 @@ Player::Player(RenderWindow &window, ProjectileManager &projectile_manager)
     this->window.draw(this->sprite);
     this->velocity = Vector2f(0, 0);
     lmbPressedAndReleased = true;
+    reloadText.setString("reloading...");
+    reloadText.setCharacterSize(20);
 }
 
 Sprite &Player::getSprite() {
@@ -73,10 +75,16 @@ void Player::shoot() {
     //this->projectile_manager.addProjectile(std::make_unique<Projectile>(direction, position));
 }
 
+void Player::displayReloadText() {
+    reloadText.setPosition({sprite.getPosition().x, sprite.getPosition().y - 25 }) ;
+    window.draw(reloadText);
+}
+
 void Player::handleReload() {
-   if (weapon.isReloading()) {
-       weapon.reload();
-   }
+    if (weapon.isReloading()) {
+        displayReloadText();
+        weapon.reload();
+    }
 }
 
 void Player::update() {

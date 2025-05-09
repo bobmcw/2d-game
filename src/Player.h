@@ -37,6 +37,8 @@ public:
 
     void shoot();
 
+    void displayReloadText();
+
     void handleReload();
 
     int getHp();
@@ -57,7 +59,9 @@ private:
     ProjectileManager &projectile_manager;
     Vector2f velocity;
     int hp;
-    sf::Clock eyeFrameClock;
+    Clock eyeFrameClock;
+    Font font;
+    Text reloadText;
 };
 
 

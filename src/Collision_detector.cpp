@@ -88,7 +88,7 @@ void Collision_detector::checkColisionWithPlayer() {
                     std::cout << "next lvl";
                     this->map_parser.load_next_map();
                     hatch = nullptr;
-                    this->player.getSprite().setPosition({500, 500});
+                    this->player.getSprite().setPosition({750, 750});
                 }
             }
         }

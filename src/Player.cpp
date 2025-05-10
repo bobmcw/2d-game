@@ -17,7 +17,7 @@ Player::Player(RenderWindow &window, ProjectileManager &projectile_manager)
         std::cerr << "failed to load /Assets/textures/player.png";
     }
     this->sprite = Sprite(this->texture);
-    this->sprite.setPosition({500, 500});
+    this->sprite.setPosition({750, 750});
     this->sprite.setTextureRect(sf::IntRect({0, 0}, {50, 50}));
     this->window.draw(this->sprite);
     this->velocity = Vector2f(0, 0);

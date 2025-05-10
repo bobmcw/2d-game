@@ -52,7 +52,7 @@ Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projecti
         }
     }
     sprite = sf::Sprite(texture);
-    sprite.setPosition({500, 500});
+    sprite.setPosition({750, 750});
 }
 
 Weapon::Weapon(ProjectileManager &projectile_manager): Weapon(randomWeaponType(), projectile_manager) {}

@@ -117,5 +117,6 @@ weaponType Weapon::randomWeaponType() {
     static std::mt19937 gen(rd());
     std::uniform_int_distribution<> dist(0, static_cast<int>(types.size() - 1));
     auto tmp = types[dist(gen)];
+    fmt::println("selected weapon: {}",static_cast<int>(tmp));
     return tmp;
 }

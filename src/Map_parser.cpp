@@ -29,7 +29,13 @@ void Map_parser::draw(const Drawable &drawable) const {
 
 
 void Map_parser::load_maps() {
+    loadMap(std::filesystem::directory_entry(fs::path("./Assets/special_maps/start.map")));
     for (auto const &mapFile: fs::directory_iterator(fs::path("./Assets/maps"))) {
+        loadMap(mapFile);
+    }
+    loadMap(std::filesystem::directory_entry(fs::path("./Assets/special_maps/boss.map")));
+}
+void Map_parser::loadMap(std::filesystem::directory_entry const& mapFile) {
         auto line = std::string();
         auto map = std::fstream(mapFile.path());
         auto stringMap = std::vector<std::string>();
@@ -39,8 +45,6 @@ void Map_parser::load_maps() {
         maps.push_back(stringMap);
         auto enemyPath = std::string(mapFile.path().filename().replace_extension("").generic_string());
         load_enemy_layout(enemyPath);
-    }
-    fmt::println("{}", this->maps);
 }
 
 void Map_parser::load_enemy_layout(std::string &filename) {

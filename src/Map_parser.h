@@ -12,6 +12,8 @@ public:
     Map_parser(sf::RenderWindow &window, EnemyController &enemy_controller, ProjectileManager &projectile_manager);
     void load_maps();
 
+    void loadMap(std::filesystem::directory_entry const &path);
+
     void load_enemy_layout(std::string &filename);
 
     void load_next_map();

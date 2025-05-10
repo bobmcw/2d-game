@@ -29,7 +29,7 @@ Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projecti
             isAutomatic = true;
             dmg = 3;
             firerate = 0.1;
-            spread = 0.2;
+            spread = 30;
             assert(texture.loadFromFile("Assets/textures/ak-47.png"));
         }
         case weaponType::uzi: {
@@ -38,7 +38,7 @@ Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projecti
             isAutomatic = true;
             dmg = 1;
             firerate = 0.05;
-            spread = 0.5;
+            spread = 60;
             assert(texture.loadFromFile("Assets/textures/uzi.png"));
         }
         case weaponType::ppbizon: {
@@ -47,7 +47,7 @@ Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projecti
             isAutomatic = true;
             dmg = 1;
             firerate = 0.1;
-            spread = 60;
+            spread = 120;
             assert(texture.loadFromFile("Assets/textures/ppbizon.png"));
         }
     }

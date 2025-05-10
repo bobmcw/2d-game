@@ -4,14 +4,13 @@
 
 #include "SFML/Window/Keyboard.hpp"
 #include <cmath>
-#include <utility>
 
 
 using namespace sf;
 
 Player::Player(RenderWindow &window, ProjectileManager &projectile_manager)
     : sprite(this->texture), window(window), projectile_manager(projectile_manager), hp(10), font("Assets/ByteBounce.ttf"), reloadText(font),
-      weapon(Weapon(weaponType::pistol, projectile_manager)) {
+      weapon(Weapon(weaponType::ppbizon, projectile_manager)) {
     this->pressedKeys = PressedKeys();
     this->texture = Texture();
     if (!this->texture.loadFromFile("Assets/textures/player.png")) {

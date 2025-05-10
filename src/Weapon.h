@@ -18,6 +18,9 @@ public:
     Weapon(ProjectileManager &projectile_manager);
     void shoot(sf::Vector2f direction, sf::Vector2f position);
 
+    void applyRandomSpread(sf::Vector2<float> &v, float spread);
+
+
     void reload();
 
     bool isAutomatic;

@@ -1,7 +1,7 @@
 #include "Weapon.h"
 
 #include <random>
-
+#include <cmath>
 #include "fmt/base.h"
 #include "SFML/Graphics/Texture.hpp"
 
@@ -47,7 +47,7 @@ Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projecti
             isAutomatic = true;
             dmg = 1;
             firerate = 0.1;
-            spread = 0.65;
+            spread = 60;
             assert(texture.loadFromFile("Assets/textures/ppbizon.png"));
         }
     }
@@ -59,10 +59,32 @@ Weapon::Weapon(ProjectileManager &projectile_manager): Weapon(randomWeaponType()
 
 void Weapon::shoot(sf::Vector2f direction, sf::Vector2f position) {
     if (shotCooldown.getElapsedTime().asSeconds() > firerate && ammo > 0) {
+        applyRandomSpread(direction, spread);
         projectile_manager.get().addProjectile(std::make_unique<Projectile>(direction, position));
         shotCooldown.restart();
         ammo--;
     }
+}
+
+void Weapon::applyRandomSpread(sf::Vector2<float> &v, float spread) {
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
+
+    float maxSpread = spread * (M_PI / 180.0f);
+
+    std::uniform_real_distribution<> dist(-maxSpread / 2.0f, maxSpread / 2.0f);
+    float angleOffset = dist(gen);
+
+    float cosA = std::cos(angleOffset);
+    float sinA = std::sin(angleOffset);
+
+    float originalX = v.x;
+    float originalY = v.y;
+
+    //2D vector rotation formula
+    //https://en.wikipedia.org/wiki/Rotation_matrix
+    v.x = originalX * cosA - originalY * sinA;
+    v.y = originalX * sinA + originalY * cosA;
 }
 
 void Weapon::reload() {

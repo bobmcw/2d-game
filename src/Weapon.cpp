@@ -31,6 +31,7 @@ Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projecti
             firerate = 0.1;
             spread = 30;
             assert(texture.loadFromFile("Assets/textures/ak-47.png"));
+            break;
         }
         case weaponType::uzi: {
             maxAmmo = 15;
@@ -40,6 +41,7 @@ Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projecti
             firerate = 0.05;
             spread = 60;
             assert(texture.loadFromFile("Assets/textures/uzi.png"));
+            break;
         }
         case weaponType::ppbizon: {
             maxAmmo = 64;
@@ -49,6 +51,7 @@ Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projecti
             firerate = 0.1;
             spread = 120;
             assert(texture.loadFromFile("Assets/textures/ppbizon.png"));
+            break;
         }
     }
     sprite = sf::Sprite(texture);
@@ -117,6 +120,5 @@ weaponType Weapon::randomWeaponType() {
     static std::mt19937 gen(rd());
     std::uniform_int_distribution<> dist(0, static_cast<int>(types.size() - 1));
     auto tmp = types[dist(gen)];
-    fmt::println("selected weapon: {}",static_cast<int>(tmp));
     return tmp;
 }

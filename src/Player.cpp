@@ -10,7 +10,7 @@ using namespace sf;
 
 Player::Player(RenderWindow &window, ProjectileManager &projectile_manager)
     : sprite(this->texture), window(window), projectile_manager(projectile_manager), hp(10), font("Assets/ByteBounce.ttf"), reloadText(font),
-      weapon(Weapon(weaponType::ppbizon, projectile_manager)) {
+      weapon(Weapon(weaponType::ak47, projectile_manager)) {
     this->pressedKeys = PressedKeys();
     this->texture = Texture();
     if (!this->texture.loadFromFile("Assets/textures/player.png")) {

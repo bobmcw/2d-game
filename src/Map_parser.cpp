@@ -30,10 +30,12 @@ void Map_parser::draw(const Drawable &drawable) const {
 
 void Map_parser::load_maps() {
     loadMap(std::filesystem::directory_entry(fs::path("./Assets/special_maps/start.map")));
+    loadMap(std::filesystem::directory_entry(fs::path("./Assets/special_maps/boss.map")));
     for (auto const &mapFile: fs::directory_iterator(fs::path("./Assets/maps"))) {
         loadMap(mapFile);
     }
-    loadMap(std::filesystem::directory_entry(fs::path("./Assets/special_maps/boss.map")));
+    //uncomment this after testing
+    //loadMap(std::filesystem::directory_entry(fs::path("./Assets/special_maps/boss.map")));
 }
 void Map_parser::loadMap(std::filesystem::directory_entry const& mapFile) {
         auto line = std::string();
@@ -107,7 +109,9 @@ void Map_parser::load_next_map() {
                 } else if (vals.front() == 'S') {
                     enemy_controller.addEnemy(
                         std::make_unique<Shooting_enemy>(std::stof(vals[1]), std::stof(vals[2]), projectile_manager));
-                } else {
+                } else if (vals.front() == 'B') {
+                    enemy_controller.addEnemy(std::make_unique<Boss>(std::stof(vals[1]), std::stof(vals[2]), projectile_manager));
+                }else {
                     fmt::println("invalid enemy type: {}", vals.front());;
                 }
         }

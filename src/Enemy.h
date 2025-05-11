@@ -10,7 +10,7 @@ class Enemy {
 public:
     Enemy(float initialX, float initialY);
 
-    ~Enemy();
+    virtual ~Enemy();
 
     sf::Sprite getSprite();
 
@@ -43,17 +43,19 @@ public:
 
     void enemyAction(sf::Vector2f playerPosition) override;
 
-private:
+protected:
     ProjectileManager& projectile_manager;
     sf::Clock shootingCooldown;
 };
 
-class Boss : public Enemy {
+class Boss : public Shooting_enemy {
 public:
     Boss(float initialX, float initialY,ProjectileManager &projectile_manager);
+
+    void circleAttack(sf::Vector2f playerPosition);
+
     void enemyAction(sf::Vector2f playerPosition) override;
 private:
-    ProjectileManager& projectile_manager;
 };
 
 #endif //ENEMY_H

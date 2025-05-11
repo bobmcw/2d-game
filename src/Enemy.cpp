@@ -72,11 +72,27 @@ void Shooting_enemy::enemyAction(sf::Vector2f playerPosition) {
 
 //Boss
 
-Boss::Boss(float initialX, float initialY, ProjectileManager &projectile_manager) : Enemy(initialX,initialY),projectile_manager(projectile_manager) {
+Boss::Boss(float initialX, float initialY, ProjectileManager &projectile_manager) : Shooting_enemy(initialX,initialY,projectile_manager) {
 
 }
-void Boss::enemyAction(sf::Vector2f playerPosition) {
+void Boss::circleAttack(sf::Vector2f playerPosition) {
+   auto numPoints = 20;
+   auto radius = 50;
+   auto currentPosition = sprite.getGlobalBounds().getCenter();
+   for (int i =0; i< numPoints; i++) {
+      auto tmp = (2 * M_PI * i) / numPoints;
 
+      auto spawnPoint = sf::Vector2f(currentPosition.x + radius * std::cos(tmp),currentPosition.y + radius * std::sin(tmp));
+
+      auto direction = spawnPoint - currentPosition;
+      auto length = std::sqrt((direction.x * direction.x) + (direction.y * direction.y));
+      direction /= length;
+
+      projectile_manager.addProjectile(std::make_unique<Projectile>(direction,spawnPoint));
+   }
+}
+void Boss::enemyAction(sf::Vector2f playerPosition) {
+   circleAttack(playerPosition);
 }
 
 

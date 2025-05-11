@@ -20,8 +20,6 @@ public:
 
     void takeDamage();
 
-    void die();
-
     bool isDead();
 
     virtual void enemyAction(sf::Vector2f playerPosition);

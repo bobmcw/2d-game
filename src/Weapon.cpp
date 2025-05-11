@@ -4,6 +4,9 @@
 #include <cmath>
 #include "fmt/base.h"
 #include "SFML/Graphics/Texture.hpp"
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projectile_manager(
                                                                             std::ref(projectile_manager)),

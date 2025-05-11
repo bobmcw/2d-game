@@ -16,7 +16,7 @@ public:
 
     void update();
 
-    void MoveTowards(sf::Vector2f position);
+    void moveTowards(sf::Vector2f position);
 
     void takeDamage();
 
@@ -33,6 +33,7 @@ protected:
     int y;
     int health;
     sf::Clock dmgFlashClock;
+    float movementSpeed;
 };
 
 class Shooting_enemy : public Enemy {
@@ -56,6 +57,7 @@ public:
 
     void enemyAction(sf::Vector2f playerPosition) override;
 private:
+    sf::Clock specialAttackTimer;
 };
 
 #endif //ENEMY_H

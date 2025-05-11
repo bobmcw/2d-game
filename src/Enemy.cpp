@@ -84,7 +84,7 @@ Boss::Boss(float initialX, float initialY, ProjectileManager &projectile_manager
 }
 
 void Boss::circleAttack(sf::Vector2f playerPosition) {
-    if (specialAttackTimer.getElapsedTime().asSeconds() >= 2) {
+    if (specialAttackTimer.getElapsedTime().asSeconds() >= 5) {
         auto numPoints = 40;
         auto radius = 50;
         auto currentPosition = sprite.getGlobalBounds().getCenter();

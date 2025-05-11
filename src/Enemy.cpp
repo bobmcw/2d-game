@@ -1,10 +1,10 @@
 #include "Enemy.h"
 #include <cmath>
 #include <iostream>
-
-#include "fmt/base.h"
 #include "SFML/System/Time.hpp"
-
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 Enemy::Enemy(float initialX, float initialY) : sprite(this->texture), x(initialX), y(initialY), texture(sf::Texture()),health(10), dmgFlashClock(sf::Clock()) {
    assert(texture.loadFromFile("Assets/textures/enemy.png"));
    this->sprite = sf::Sprite(this->texture);

@@ -20,6 +20,7 @@ public:
 
     void applyRandomSpread(sf::Vector2<float> &v, float spread);
 
+    void bindTexture();
 
     void reload();
 

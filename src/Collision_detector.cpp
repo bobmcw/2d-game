@@ -32,7 +32,7 @@ void Collision_detector::spawnReward() {
 }
 
 void Collision_detector::checkRewardCollision() {
-   if (reward.getSprite().getGlobalBounds().findIntersection(player.getSprite().getGlobalBounds())) {
+   if (reward.getSprite().getGlobalBounds().findIntersection(player.getSprite().getGlobalBounds()) && !rewardPickedUp) {
        player.setWeapon(reward);
        rewardPickedUp = true;
    }
@@ -86,6 +86,9 @@ void Collision_detector::checkColisionWithPlayer() {
             if (auto o = dynamic_cast<Openable *>(t.get())) {
                 if (o->isOpened()) {
                     std::cout << "next lvl";
+                    reward = std::move(Weapon(std::ref(projectile_manager)));
+                    reward.bindTexture();
+                    rewardPickedUp = false;
                     this->map_parser.load_next_map();
                     hatch = nullptr;
                     this->player.getSprite().setPosition({750, 750});

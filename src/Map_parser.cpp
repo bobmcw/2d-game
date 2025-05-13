@@ -30,12 +30,10 @@ void Map_parser::draw(const Drawable &drawable) const {
 
 void Map_parser::load_maps() {
     loadMap(std::filesystem::directory_entry(fs::path("./Assets/special_maps/start.map")));
-    loadMap(std::filesystem::directory_entry(fs::path("./Assets/special_maps/boss.map")));
     for (auto const &mapFile: fs::directory_iterator(fs::path("./Assets/maps"))) {
         loadMap(mapFile);
     }
-    //uncomment this after testing
-    //loadMap(std::filesystem::directory_entry(fs::path("./Assets/special_maps/boss.map")));
+    loadMap(std::filesystem::directory_entry(fs::path("./Assets/special_maps/boss.map")));
 }
 void Map_parser::loadMap(std::filesystem::directory_entry const& mapFile) {
         auto line = std::string();

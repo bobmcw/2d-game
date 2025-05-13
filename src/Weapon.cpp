@@ -93,7 +93,7 @@ void Weapon::applyRandomSpread(sf::Vector2<float> &v, float spread) {
     v.y = originalX * sinA + originalY * cosA;
 }
 
-void Weapon::bindTexture() {
+void Weapon::rebindTexture() {
     sprite.setTexture(texture);
 }
 

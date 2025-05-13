@@ -87,7 +87,7 @@ void Collision_detector::checkColisionWithPlayer() {
                 if (o->isOpened()) {
                     std::cout << "next lvl";
                     reward = std::move(Weapon(std::ref(projectile_manager)));
-                    reward.bindTexture();
+                    reward.rebindTexture();
                     rewardPickedUp = false;
                     this->map_parser.load_next_map();
                     hatch = nullptr;

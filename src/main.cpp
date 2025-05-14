@@ -3,6 +3,7 @@
 #include "Collision_detector.h"
 #include "EnemyController.h"
 #include "Map_parser.h"
+#include "Menu.h"
 #include "Player.h"
 #include "UI.h"
 
@@ -15,8 +16,9 @@ int main()
     auto player = Player(window,projectileManager);
     auto enemyController = EnemyController(window, player);
     auto ui = UI(window,player);
-
+    auto menu = Menu(window);
     auto maploader = Map_parser(window,enemyController,projectileManager);
+
     maploader.load_maps();
     maploader.load_next_map();
 
@@ -33,15 +35,20 @@ int main()
             }
             player.listenForKeyPresses(event);
         }
-        //drawing objects
-        maploader.draw_current_map();
-        projectileManager.updateProjectiles();
-        ui.update();
-        //collision
-        collision_detector.update();
-        //updating objects
-        player.update();
-        enemyController.updateEnemies();
-        window.display();
+        if (!menu.isActive()) {
+            //drawing objects
+            maploader.draw_current_map();
+            projectileManager.updateProjectiles();
+            ui.update();
+            //collision
+            collision_detector.update();
+            //updating objects
+            player.update();
+            enemyController.updateEnemies();
+            window.display();
+        }
+        else {
+            menu.displayMenu();
+        }
     }
 }

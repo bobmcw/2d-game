@@ -44,6 +44,8 @@ add_executable(main src/main.cpp
         src/UI.cpp
         src/UI.h
         src/Weapon.cpp
-        src/Weapon.h)
+        src/Weapon.h
+        src/Menu.cpp
+        src/Menu.h)
 #target_compile_features(main PRIVATE cxx_std_17)
 target_link_libraries(main PRIVATE SFML::Graphics fmt)

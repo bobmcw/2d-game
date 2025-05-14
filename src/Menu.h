@@ -1,5 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
+#include <utility>
+
 #include "SFML/Graphics/Font.hpp"
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
@@ -15,7 +17,8 @@ struct Option {
     inline static sf::Font font = sf::Font("Assets/ByteBounce.ttf");
     options val;
     sf::Text text;
-    Option(options o, std::string text) : val(o), text(font) {
+    std::function<void()> callback;
+    Option(options o, std::string text, std::function<void()> f) : val(o), text(font), callback(std::move(f)) {
         this->text.setString(text);
         this->text.setCharacterSize(24);
         this->text.setFillColor(sf::Color::White);

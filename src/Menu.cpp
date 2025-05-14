@@ -5,9 +5,9 @@ Menu::Menu(sf::RenderWindow &window) : menu_(sf::RectangleShape({
                                            static_cast<float>(window.getSize().y)
                                        })), window(window), isActive_(true),
                                        options({
-                                           Option(options::Start, "Start"),
-                                           Option(options::Continue, "Continue"),
-                                           Option(options::Exit, "Exit")
+                                           Option(options::Start, "Start", [this]() {this->hideMenu();}),
+                                           Option(options::Continue, "Continue", [this]() {this->hideMenu();}),
+                                           Option(options::Exit, "Exit", [&window]() {window.close();})
                                        }), selectedIndex(0) {
     menu_.setFillColor(sf::Color::Black);
 }
@@ -23,6 +23,10 @@ void Menu::displayMenu() {
         y += 50;
         window.draw(o.text);
     }
+}
+
+void Menu::hideMenu() {
+    isActive_ = false;
 }
 
 bool Menu::isActive() {
@@ -52,6 +56,8 @@ void Menu::listenToKeyPresses(std::optional<sf::Event> event) {
             moveUp();
         }else if (e->code == sf::Keyboard::Key::Down){
             moveDown();
+        } else if (e->code == sf::Keyboard::Key::Enter) {
+            options.at(selectedIndex).callback();
         }
     }
 }

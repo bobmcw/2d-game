@@ -3,13 +3,55 @@
 Menu::Menu(sf::RenderWindow &window) : menu_(sf::RectangleShape({
                                            static_cast<float>(window.getSize().x),
                                            static_cast<float>(window.getSize().y)
-                                       })), window(window), isActive_(true) {
+                                       })), window(window), isActive_(true),
+                                       options({
+                                           Option(options::Start, "Start"),
+                                           Option(options::Continue, "Continue"),
+                                           Option(options::Exit, "Exit")
+                                       }), selectedIndex(0) {
+    menu_.setFillColor(sf::Color::Black);
 }
 
 void Menu::displayMenu() {
     window.draw(menu_);
+    float x = window.getSize().x/2;
+    float y = window.getSize().y/2;
+    for (Option &o : options) {
+        o.text.setPosition({x,y});
+        o.text.setFillColor(sf::Color::White);
+        highlightSelected();
+        y += 50;
+        window.draw(o.text);
+    }
 }
 
 bool Menu::isActive() {
     return isActive_;
+}
+void Menu::highlightSelected() {
+    options.at(selectedIndex).text.setFillColor(sf::Color::Yellow);
+}
+
+void Menu::moveDown() {
+    if (selectedIndex >= options.size() -1) {
+        return;
+    }
+    selectedIndex++;
+}
+
+void Menu::moveUp() {
+    if (selectedIndex <= 0) {
+        return;
+    }
+    selectedIndex--;
+}
+
+void Menu::listenToKeyPresses(std::optional<sf::Event> event) {
+    if (auto const e = event->getIf<sf::Event::KeyPressed>()) {
+        if (e->code == sf::Keyboard::Key::Up) {
+            moveUp();
+        }else if (e->code == sf::Keyboard::Key::Down){
+            moveDown();
+        }
+    }
 }

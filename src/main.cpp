@@ -34,6 +34,7 @@ int main()
                 window.close();
             }
             player.listenForKeyPresses(event);
+            menu.listenToKeyPresses(event);
         }
         if (!menu.isActive()) {
             //drawing objects
@@ -45,10 +46,10 @@ int main()
             //updating objects
             player.update();
             enemyController.updateEnemies();
-            window.display();
         }
         else {
             menu.displayMenu();
         }
+        window.display();
     }
 }

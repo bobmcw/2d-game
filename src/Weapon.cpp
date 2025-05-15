@@ -23,6 +23,7 @@ Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projecti
             dmg = 1;
             firerate = 0.3;
             spread = 0;
+            id = 0;
             assert(texture.loadFromFile("Assets/textures/pistol.png"));
             break;
         }
@@ -33,6 +34,7 @@ Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projecti
             dmg = 3;
             firerate = 0.1;
             spread = 30;
+            id = 1;
             assert(texture.loadFromFile("Assets/textures/ak-47.png"));
             break;
         }
@@ -43,6 +45,7 @@ Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projecti
             dmg = 1;
             firerate = 0.05;
             spread = 60;
+            id = 2;
             assert(texture.loadFromFile("Assets/textures/uzi.png"));
             break;
         }
@@ -53,6 +56,7 @@ Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projecti
             dmg = 1;
             firerate = 0.1;
             spread = 120;
+            id = 3;
             assert(texture.loadFromFile("Assets/textures/ppbizon.png"));
             break;
         }
@@ -115,6 +119,11 @@ sf::Sprite &Weapon::getSprite() {
 int Weapon::getAmmo() const {
     return ammo;
 }
+
+int Weapon::getId() const {
+    return id;
+}
+
 int Weapon::getMaxAmmo() const {
     return maxAmmo;
 }

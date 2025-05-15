@@ -30,6 +30,8 @@ public:
 
     int getAmmo() const;
 
+    int getId() const;
+
     int getMaxAmmo() const;
 
     bool isReloading() const;
@@ -43,6 +45,7 @@ private:
     sf::Clock shotCooldown;
     sf::Clock reloadTimer;
     int maxAmmo;
+    int id;
     int ammo;
     int dmg;
     float firerate;

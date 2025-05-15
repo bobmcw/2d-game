@@ -34,6 +34,10 @@ int Player::getHp() {
     return hp;
 }
 
+void Player::setHp(int hp) {
+    this->hp = hp;
+}
+
 void Player::takeDamage() {
     if (eyeFrameClock.isRunning() && eyeFrameClock.getElapsedTime().asSeconds() > 0.75) {
         hp -= 1;
@@ -43,6 +47,9 @@ void Player::takeDamage() {
 
 void Player::setWeapon(Weapon w) {
     this->weapon = std::move(w);
+}
+void Player::setWeapon(int id) {
+
 }
 
 Weapon &Player::getWeapon() {

@@ -43,9 +43,13 @@ public:
 
     int getHp();
 
+    void setHp(int hp);
+
     void takeDamage();
 
     void setWeapon(Weapon w);
+
+    void setWeapon(int id);
 
     Weapon &getWeapon();
 

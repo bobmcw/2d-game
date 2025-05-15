@@ -29,8 +29,10 @@ struct Option {
 
 class Menu {
 public:
-    Menu(sf::RenderWindow &window, SaverAndLoader &saveManager);
+    Menu(sf::RenderWindow &window, SaverAndLoader &saveManager, Map_parser &mapLoader);
     void displayMenu();
+
+    void startNewGame();
 
     void loadAndStart();
 
@@ -45,6 +47,7 @@ private:
     void moveDown();
     sf::RenderWindow &window;
     SaverAndLoader &saveManager;
+    Map_parser &mapLoader;
     bool isActive_;
     sf::RectangleShape menu_;
     std::vector<Option> options;

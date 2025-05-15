@@ -6,7 +6,7 @@
 
 Collision_detector::Collision_detector(Player &player, std::vector<std::unique_ptr<Terrain> > &loaded_terrain,
                                        ProjectileManager &projectile_manager,
-                                       EnemyController &enemy_controller, Map_parser &map_parser): player(player),
+                                       EnemyController &enemy_controller, Map_parser &map_parser, SaverAndLoader &saveManager): player(player), saveManager(saveManager),
     hatch(nullptr), reward(Weapon( std::ref(projectile_manager))),
     enemy_controller(enemy_controller),
     loaded_terrain(loaded_terrain),
@@ -92,6 +92,7 @@ void Collision_detector::checkColisionWithPlayer() {
                     this->map_parser.load_next_map();
                     hatch = nullptr;
                     this->player.getSprite().setPosition({750, 750});
+                    saveManager.save();
                 }
             }
         }

@@ -1,11 +1,11 @@
 #include "Menu.h"
 
-Menu::Menu(sf::RenderWindow &window, SaverAndLoader &saveManager) : menu_(sf::RectangleShape({
+Menu::Menu(sf::RenderWindow &window, SaverAndLoader &saveManager, Map_parser &mapLoader) : menu_(sf::RectangleShape({
                                            static_cast<float>(window.getSize().x),
                                            static_cast<float>(window.getSize().y)
-                                       })), window(window),saveManager(saveManager), isActive_(true),
+                                       })), mapLoader(mapLoader),window(window),saveManager(saveManager), isActive_(true),
                                        options({
-                                           Option(options::Start, "Start", [this]() {this->hideMenu();}),
+                                           Option(options::Start, "Start", [this]() {startNewGame();}),
                                            Option(options::Continue, "Continue", [this]() {this->loadAndStart();}),
                                            Option(options::Exit, "Exit", [&window]() {window.close();})
                                        }), selectedIndex(0) {
@@ -25,8 +25,15 @@ void Menu::displayMenu() {
     }
 }
 
+void Menu::startNewGame() {
+   mapLoader.load_maps();
+    mapLoader.load_current_map();
+    hideMenu();
+}
+
 void Menu::loadAndStart() {
    saveManager.load();
+    mapLoader.load_current_map();
    hideMenu();
 }
 

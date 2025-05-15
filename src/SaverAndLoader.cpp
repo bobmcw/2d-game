@@ -1,6 +1,7 @@
 #include "SaverAndLoader.h"
 
 #include <fstream>
+#include <sstream>
 
 SaverAndLoader::SaverAndLoader(Player &player, EnemyController &enemy_controller,
                                Map_parser &map_parser): player(player),
@@ -33,7 +34,17 @@ void SaverAndLoader::loadPlayer() {
     player.setHp(std::stoi(hp));
     player.setWeapon(std::stoi(weaponId));
 }
+void SaverAndLoader::loadMaps() {
+    std::ifstream in("maps.dat");
+    std::string directory;
+    std::vector<std::string> loadedMaps;
+    while (in >> directory) {
+        loadedMaps.push_back(directory);
+    }
+    map_parser.loadMapsFromSave(loadedMaps);
+}
 
 void SaverAndLoader::load() {
     loadPlayer();
+    loadMaps();
 }

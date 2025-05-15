@@ -16,6 +16,8 @@ public:
 
     void loadPlayer();
 
+    void loadMaps();
+
     void load();
 private:
     Player &player;

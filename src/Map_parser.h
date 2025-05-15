@@ -14,9 +14,14 @@ public:
 
     void loadMap(std::filesystem::directory_entry const &path);
 
+    void loadMapsFromSave(std::vector<std::string> const &maps);
+
     void load_enemy_layout(std::string &filename);
 
     void load_next_map();
+
+    void load_current_map();
+
     void draw_current_map();
 
     std::vector<std::unique_ptr<Terrain>> &get_loaded_sprites();

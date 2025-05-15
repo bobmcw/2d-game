@@ -52,6 +52,11 @@ void Map_parser::loadMap(std::filesystem::directory_entry const& mapFile) {
         auto enemyPath = std::string(mapFile.path().filename().replace_extension("").generic_string());
         load_enemy_layout(enemyPath);
 }
+void Map_parser::loadMapsFromSave(std::vector<std::string> const &maps) {
+   for (auto const &m : maps) {
+       loadMap(std::filesystem::directory_entry(fs::path(m)));
+   }
+}
 
 void Map_parser::load_enemy_layout(std::string &filename) {
     auto vec = std::vector<std::string>();
@@ -67,9 +72,14 @@ void Map_parser::load_enemy_layout(std::string &filename) {
 }
 
 void Map_parser::load_next_map() {
+   maps.pop_front();
+   mapOrder.pop_front();
+   enemyLayouts.pop_front();
+   load_current_map();
+}
+
+void Map_parser::load_current_map() {
     loadedSprites.clear();
-    maps.pop_front();
-    enemyLayouts.pop_front();
     auto startX = 100;
     auto x = 100;
     auto y = 100;

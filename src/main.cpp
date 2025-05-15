@@ -19,7 +19,7 @@ int main()
     auto ui = UI(window,player);
     auto menu = Menu(window);
     auto maploader = Map_parser(window,enemyController,projectileManager);
-    auto saveManager = SaverAndLoader(player,enemyController,maploader);
+    auto saveManager = SaverAndLoader(player,enemyController,maploader,projectileManager);
 
     maploader.load_maps();
     saveManager.save();

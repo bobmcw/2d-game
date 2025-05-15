@@ -16,6 +16,7 @@ class Weapon {
 public:
     Weapon(weaponType type, ProjectileManager &projectile_manager);
     Weapon(ProjectileManager &projectile_manager);
+    Weapon(int id, ProjectileManager &projectile_manager);
     void shoot(sf::Vector2f direction, sf::Vector2f position);
 
     void applyRandomSpread(sf::Vector2<float> &v, float spread);
@@ -36,7 +37,9 @@ public:
 
     bool isReloading() const;
 
-    weaponType randomWeaponType();
+    static weaponType randomWeaponType();
+
+    static weaponType idToType(int id);
 
 private:
     std::reference_wrapper<ProjectileManager> projectile_manager;

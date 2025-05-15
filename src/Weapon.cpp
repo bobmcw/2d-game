@@ -67,6 +67,8 @@ Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projecti
 
 Weapon::Weapon(ProjectileManager &projectile_manager): Weapon(randomWeaponType(), projectile_manager) {}
 
+Weapon::Weapon(int id, ProjectileManager &projectile_manager) : Weapon(idToType(id), projectile_manager) {}
+
 void Weapon::shoot(sf::Vector2f direction, sf::Vector2f position) {
     if (shotCooldown.getElapsedTime().asSeconds() > firerate && ammo > 0) {
         applyRandomSpread(direction, spread);
@@ -137,4 +139,8 @@ weaponType Weapon::randomWeaponType() {
     std::uniform_int_distribution<> dist(0, static_cast<int>(types.size() - 1));
     auto tmp = types[dist(gen)];
     return tmp;
+}
+weaponType Weapon::idToType(int id) {
+    auto types = std::vector<weaponType>{weaponType::ak47, weaponType::pistol, weaponType::ppbizon, weaponType::uzi};
+    return types.at(id);
 }

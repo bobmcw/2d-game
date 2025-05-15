@@ -6,6 +6,7 @@
 #include "Menu.h"
 #include "Player.h"
 #include "UI.h"
+#include "SaverAndLoader.h"
 
 int main()
 {
@@ -18,8 +19,10 @@ int main()
     auto ui = UI(window,player);
     auto menu = Menu(window);
     auto maploader = Map_parser(window,enemyController,projectileManager);
+    auto saveManager = SaverAndLoader(player,enemyController,maploader);
 
     maploader.load_maps();
+    saveManager.save();
     maploader.load_next_map();
 
     auto collision_detector = Collision_detector(player, maploader.get_loaded_sprites(),projectileManager,enemyController,maploader);

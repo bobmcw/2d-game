@@ -23,6 +23,10 @@ std::vector<std::unique_ptr<Terrain> > &Map_parser::get_loaded_sprites() {
     return loadedSprites;
 }
 
+std::deque<std::string> & Map_parser::getMapOrder() {
+    return mapOrder;
+}
+
 void Map_parser::draw(const Drawable &drawable) const {
     window.draw(drawable);
 }
@@ -34,6 +38,7 @@ void Map_parser::load_maps() {
         loadMap(mapFile);
     }
     loadMap(std::filesystem::directory_entry(fs::path("./Assets/special_maps/boss.map")));
+    fmt::println("{}",mapOrder);
 }
 void Map_parser::loadMap(std::filesystem::directory_entry const& mapFile) {
         auto line = std::string();
@@ -42,6 +47,7 @@ void Map_parser::loadMap(std::filesystem::directory_entry const& mapFile) {
         while (std::getline(map, line)) {
             stringMap.push_back(line);
         }
+        mapOrder.push_back(mapFile.path());
         maps.push_back(stringMap);
         auto enemyPath = std::string(mapFile.path().filename().replace_extension("").generic_string());
         load_enemy_layout(enemyPath);

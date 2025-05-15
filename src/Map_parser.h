@@ -20,15 +20,17 @@ public:
     void draw_current_map();
 
     std::vector<std::unique_ptr<Terrain>> &get_loaded_sprites();
+    std::deque<std::string> &getMapOrder();
 
     void draw(const Drawable &drawable) const;
 private:
-    sf::RenderWindow& window;
+    RenderWindow& window;
     std::vector<std::unique_ptr<Terrain>> loadedSprites = std::vector<std::unique_ptr<Terrain>>{};
     std::deque<std::vector<std::string>> maps = std::deque<std::vector<std::string>>{};
     std::deque<std::vector<std::string>> enemyLayouts;
     EnemyController &enemy_controller;
     ProjectileManager &projectile_manager;
+    std::deque<std::string> mapOrder;
 };
 
 

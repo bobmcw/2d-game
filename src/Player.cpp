@@ -49,7 +49,8 @@ void Player::setWeapon(Weapon w) {
     this->weapon = std::move(w);
 }
 void Player::setWeapon(int id) {
-
+    this->weapon = Weapon(id,projectile_manager);
+    weapon.rebindTexture();
 }
 
 Weapon &Player::getWeapon() {

@@ -6,7 +6,7 @@
 
 class SaverAndLoader {
 public:
-    SaverAndLoader(Player &player, EnemyController &enemy_controller, Map_parser &map_parser,ProjectileManager &projectile_manager);
+    SaverAndLoader(Player &player, EnemyController &enemy_controller, Map_parser &map_parser);
 
     void savePlayer();
 
@@ -19,7 +19,6 @@ public:
     void load();
 private:
     Player &player;
-    ProjectileManager &projectile_manager;
     EnemyController &enemy_controller;
     Map_parser &map_parser;
 };

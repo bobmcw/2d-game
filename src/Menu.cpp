@@ -1,12 +1,12 @@
 #include "Menu.h"
 
-Menu::Menu(sf::RenderWindow &window) : menu_(sf::RectangleShape({
+Menu::Menu(sf::RenderWindow &window, SaverAndLoader &saveManager) : menu_(sf::RectangleShape({
                                            static_cast<float>(window.getSize().x),
                                            static_cast<float>(window.getSize().y)
-                                       })), window(window), isActive_(true),
+                                       })), window(window),saveManager(saveManager), isActive_(true),
                                        options({
                                            Option(options::Start, "Start", [this]() {this->hideMenu();}),
-                                           Option(options::Continue, "Continue", [this]() {this->hideMenu();}),
+                                           Option(options::Continue, "Continue", [this]() {this->loadAndStart();}),
                                            Option(options::Exit, "Exit", [&window]() {window.close();})
                                        }), selectedIndex(0) {
     menu_.setFillColor(sf::Color::Black);
@@ -23,6 +23,11 @@ void Menu::displayMenu() {
         y += 50;
         window.draw(o.text);
     }
+}
+
+void Menu::loadAndStart() {
+   saveManager.load();
+   hideMenu();
 }
 
 void Menu::hideMenu() {

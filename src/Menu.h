@@ -7,6 +7,8 @@
 #include "SFML/Graphics/Text.hpp"
 #include <functional>
 
+#include "SaverAndLoader.h"
+
 enum class options {
     Start,
     Continue,
@@ -27,8 +29,11 @@ struct Option {
 
 class Menu {
 public:
-    Menu(sf::RenderWindow &window);
+    Menu(sf::RenderWindow &window, SaverAndLoader &saveManager);
     void displayMenu();
+
+    void loadAndStart();
+
     void hideMenu();
     bool isActive() const;
 
@@ -39,6 +44,7 @@ private:
     void moveUp();
     void moveDown();
     sf::RenderWindow &window;
+    SaverAndLoader &saveManager;
     bool isActive_;
     sf::RectangleShape menu_;
     std::vector<Option> options;

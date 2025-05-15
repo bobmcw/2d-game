@@ -3,7 +3,7 @@
 #include <fstream>
 
 SaverAndLoader::SaverAndLoader(Player &player, EnemyController &enemy_controller,
-                               Map_parser &map_parser, ProjectileManager &projectile_manager): player(player), projectile_manager(projectile_manager),
+                               Map_parser &map_parser): player(player),
                                                         enemy_controller(enemy_controller),
                                                         map_parser(map_parser) {
 }

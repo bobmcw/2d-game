@@ -17,12 +17,12 @@ int main()
     auto player = Player(window,projectileManager);
     auto enemyController = EnemyController(window, player);
     auto ui = UI(window,player);
-    auto menu = Menu(window);
     auto maploader = Map_parser(window,enemyController,projectileManager);
-    auto saveManager = SaverAndLoader(player,enemyController,maploader,projectileManager);
+    auto saveManager = SaverAndLoader(player,enemyController,maploader);
+    auto menu = Menu(window,saveManager);
 
     maploader.load_maps();
-    saveManager.save();
+    //saveManager.save();
     maploader.load_next_map();
 
     auto collision_detector = Collision_detector(player, maploader.get_loaded_sprites(),projectileManager,enemyController,maploader);

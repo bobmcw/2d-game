@@ -29,7 +29,7 @@ void Menu::hideMenu() {
     isActive_ = false;
 }
 
-bool Menu::isActive() {
+bool Menu::isActive() const {
     return isActive_;
 }
 void Menu::highlightSelected() {

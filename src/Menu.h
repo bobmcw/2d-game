@@ -1,11 +1,11 @@
 #ifndef MENU_H
 #define MENU_H
-#include <utility>
 
 #include "SFML/Graphics/Font.hpp"
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
 #include "SFML/Graphics/Text.hpp"
+#include <functional>
 
 enum class options {
     Start,
@@ -30,7 +30,7 @@ public:
     Menu(sf::RenderWindow &window);
     void displayMenu();
     void hideMenu();
-    bool isActive();
+    bool isActive() const;
 
     void highlightSelected();
 

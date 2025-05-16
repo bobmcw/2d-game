@@ -49,35 +49,28 @@ void Collision_detector::checkColisionWithPlayer() {
         if (t == nullptr) {
             continue;
         }
-        if (this->player.getSprite().getGlobalBounds().findIntersection((*t).getSprite().getGlobalBounds()) && (*t).
-            hasCollision) {
-            //from bottom
-            if (this->player.getSprite().getPosition().y > (*t).getSprite().getPosition().y) {
-                player.getSprite().setPosition({
-                    this->player.getSprite().getPosition().x,
-                    (*t).getSprite().getPosition().y + (*t).getSprite().getGlobalBounds().size.y
-                });
-            }
-            //from top
-            else if (this->player.getSprite().getPosition().y < (*t).getSprite().getPosition().y) {
-                player.getSprite().setPosition({
-                    this->player.getSprite().getPosition().x,
-                    (*t).getSprite().getPosition().y - (*t).getSprite().getGlobalBounds().size.y
-                });
-            }
-            //from right
-            else if (this->player.getSprite().getPosition().x > (*t).getSprite().getPosition().x) {
-                player.getSprite().setPosition({
-                    (*t).getSprite().getPosition().x + (*t).getSprite().getGlobalBounds().size.x,
-                    this->player.getSprite().getPosition().y
-                });
-            }
-            //from left
-            else if (this->player.getSprite().getPosition().x < (*t).getSprite().getPosition().x) {
-                player.getSprite().setPosition({
-                    (*t).getSprite().getPosition().x - (*t).getSprite().getGlobalBounds().size.x,
-                    this->player.getSprite().getPosition().y
-                });
+        if (player.getSprite().getGlobalBounds().findIntersection(t->getSprite().getGlobalBounds()) && (*t).hasCollision) {
+            auto playerBounds = player.getSprite().getGlobalBounds();
+            auto tileBounds = t->getSprite().getGlobalBounds();
+            float overlapLeft   = (playerBounds.position.x + playerBounds.size.x) - tileBounds.position.x;
+            float overlapRight  = (tileBounds.position.x + tileBounds.size.x) - playerBounds.position.x;
+            float overlapTop    = (playerBounds.position.y + playerBounds.size.y) - tileBounds.position.y;
+            float overlapBottom = (tileBounds.position.y + tileBounds.size.y) - playerBounds.position.y;
+
+            bool resolveOnX = std::min(overlapLeft, overlapRight) < std::min(overlapTop, overlapBottom);
+
+            if (resolveOnX) {
+                if (overlapLeft < overlapRight) {
+                    player.getSprite().move({ -overlapLeft, 0.f }); // From left
+                } else {
+                    player.getSprite().move({ overlapRight, 0.f }); // From right
+                }
+            } else {
+                if (overlapTop < overlapBottom) {
+                    player.getSprite().move({ 0.f, -overlapTop }); // From top
+                } else {
+                    player.getSprite().move({ 0.f, overlapBottom }); // From bottom
+                }
             }
         }
         //check for collision with the hatch

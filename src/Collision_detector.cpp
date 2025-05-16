@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <random>
-#include "fmt/args.h"
 
 Collision_detector::Collision_detector(Player &player, std::vector<std::unique_ptr<Terrain> > &loaded_terrain,
                                        ProjectileManager &projectile_manager,

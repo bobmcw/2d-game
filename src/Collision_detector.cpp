@@ -92,6 +92,7 @@ void Collision_detector::checkColisionWithPlayer() {
                     this->map_parser.load_next_map();
                     hatch = nullptr;
                     this->player.getSprite().setPosition({750, 750});
+                    projectile_manager.getProjectiles().clear();
                     saveManager.save();
                 }
             }

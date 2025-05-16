@@ -4,6 +4,8 @@
 #include <iostream>
 #include <vector>
 #include <deque>
+#include <algorithm>
+#include <random>
 
 #include "EnemyController.h"
 #include "Terrain.h"
@@ -33,9 +35,23 @@ void Map_parser::draw(const Drawable &drawable) const {
 
 
 void Map_parser::load_maps() {
+    this->maps.clear();
+    this->enemyLayouts.clear();
+    this->mapOrder.clear();
+    this->loadedSprites.clear();
+    this->enemy_controller.getEnemies().clear();
+    this->projectile_manager.getProjectiles().clear();
     loadMap(std::filesystem::directory_entry(fs::path("./Assets/special_maps/start.map")));
+    auto vec = std::vector<std::filesystem::directory_entry>();
     for (auto const &mapFile: fs::directory_iterator(fs::path("./Assets/maps"))) {
-        loadMap(mapFile);
+        //loadMap(mapFile);
+        vec.push_back(mapFile);
+    }
+    auto rd = std::random_device {};
+    auto rng = std::default_random_engine { rd() };
+    std::ranges::shuffle(vec,rng);
+    for (auto const &m : vec) {
+        loadMap(m);
     }
     loadMap(std::filesystem::directory_entry(fs::path("./Assets/special_maps/boss.map")));
     fmt::println("{}",mapOrder);

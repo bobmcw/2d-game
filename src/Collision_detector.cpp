@@ -85,7 +85,7 @@ void Collision_detector::checkColisionWithPlayer() {
             if (auto o = dynamic_cast<Openable *>(t.get())) {
                 if (o->isOpened()) {
                     std::cout << "next lvl";
-                    reward = std::move(Weapon(std::ref(projectile_manager)));
+                    reward = Weapon(std::ref(projectile_manager));
                     reward.rebindTexture();
                     rewardPickedUp = false;
                     this->map_parser.load_next_map();

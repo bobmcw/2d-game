@@ -53,7 +53,7 @@ void Player::setWeapon(int id) {
     weapon.rebindTexture();
 }
 
-Weapon &Player::getWeapon() {
+Weapon& Player::getWeapon() {
     return weapon;
 }
 

@@ -19,7 +19,7 @@ int main()
     auto ui = UI(window,player);
     auto maploader = Map_parser(window,enemyController,projectileManager);
     auto saveManager = SaverAndLoader(player,enemyController,maploader);
-    auto menu = Menu(window,saveManager,maploader);
+    auto menu = Menu(window,saveManager,maploader,player);
 
     //maploader.load_maps();
     //saveManager.save();
@@ -49,6 +49,8 @@ int main()
             //updating objects
             player.update();
             enemyController.updateEnemies();
+            //check if player died
+            menu.checkIfPlayerIsDead();
         }
         else {
             menu.displayMenu();

@@ -33,6 +33,7 @@ void SaverAndLoader::loadPlayer() {
     in >> hp >> weaponId;
     player.setHp(std::stoi(hp));
     player.setWeapon(std::stoi(weaponId));
+    player.getSprite().setPosition({750,750});
 }
 void SaverAndLoader::loadMaps() {
     std::ifstream in("maps.dat");

@@ -53,6 +53,9 @@ void Map_parser::loadMap(std::filesystem::directory_entry const& mapFile) {
         load_enemy_layout(enemyPath);
 }
 void Map_parser::loadMapsFromSave(std::vector<std::string> const &maps) {
+    this->maps.clear();
+    this->enemyLayouts.clear();
+    enemy_controller.getEnemies().clear();
    for (auto const &m : maps) {
        loadMap(std::filesystem::directory_entry(fs::path(m)));
    }

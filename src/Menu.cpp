@@ -1,9 +1,9 @@
 #include "Menu.h"
 
-Menu::Menu(sf::RenderWindow &window, SaverAndLoader &saveManager, Map_parser &mapLoader) : menu_(sf::RectangleShape({
+Menu::Menu(sf::RenderWindow &window, SaverAndLoader &saveManager, Map_parser &mapLoader, Player &player) : menu_(sf::RectangleShape({
                                            static_cast<float>(window.getSize().x),
                                            static_cast<float>(window.getSize().y)
-                                       })), mapLoader(mapLoader),window(window),saveManager(saveManager), isActive_(true),
+                                       })), player(player),mapLoader(mapLoader),window(window),saveManager(saveManager), isActive_(true),
                                        options({
                                            Option(options::Start, "Start", [this]() {startNewGame();}),
                                            Option(options::Continue, "Continue", [this]() {this->loadAndStart();}),
@@ -39,6 +39,12 @@ void Menu::loadAndStart() {
 
 void Menu::hideMenu() {
     isActive_ = false;
+}
+
+void Menu::checkIfPlayerIsDead() {
+    if (player.getHp() <= 0) {
+        displayMenu();
+    }
 }
 
 bool Menu::isActive() const {

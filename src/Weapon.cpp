@@ -141,6 +141,6 @@ weaponType Weapon::randomWeaponType() {
     return tmp;
 }
 weaponType Weapon::idToType(int id) {
-    auto types = std::vector<weaponType>{weaponType::ak47, weaponType::pistol, weaponType::ppbizon, weaponType::uzi};
+    auto types = std::vector<weaponType>{weaponType::pistol, weaponType::ak47, weaponType::uzi, weaponType::ppbizon};
     return types.at(id);
 }

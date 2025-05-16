@@ -63,7 +63,7 @@ void Map_parser::loadMap(std::filesystem::directory_entry const& mapFile) {
         while (std::getline(map, line)) {
             stringMap.push_back(line);
         }
-        mapOrder.push_back(mapFile.path());
+        mapOrder.push_back(mapFile.path().string());
         maps.push_back(stringMap);
         auto enemyPath = std::string(mapFile.path().filename().replace_extension("").generic_string());
         load_enemy_layout(enemyPath);

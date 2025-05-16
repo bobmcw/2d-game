@@ -79,7 +79,6 @@ void Player::shoot() {
     if (!weapon.isReloading()) {
         weapon.shoot(direction, position);
     }
-    //this->projectile_manager.addProjectile(std::make_unique<Projectile>(direction, position));
 }
 
 void Player::displayReloadText() {

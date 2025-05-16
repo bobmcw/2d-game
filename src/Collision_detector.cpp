@@ -57,14 +57,17 @@ void Collision_detector::checkColisionWithPlayer() {
             float overlapTop    = (playerBounds.position.y + playerBounds.size.y) - tileBounds.position.y;
             float overlapBottom = (tileBounds.position.y + tileBounds.size.y) - playerBounds.position.y;
 
+            //check if the collision is more on X or Y axis
             bool resolveOnX = std::min(overlapLeft, overlapRight) < std::min(overlapTop, overlapBottom);
 
+                //correct position on X axis
             if (resolveOnX) {
                 if (overlapLeft < overlapRight) {
                     player.getSprite().move({ -overlapLeft, 0.f }); // From left
                 } else {
                     player.getSprite().move({ overlapRight, 0.f }); // From right
                 }
+                // correct position on Y axis
             } else {
                 if (overlapTop < overlapBottom) {
                     player.getSprite().move({ 0.f, -overlapTop }); // From top

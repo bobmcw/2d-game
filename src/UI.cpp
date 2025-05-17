@@ -18,10 +18,12 @@ UI::UI(sf::RenderWindow &window, Player &player) : window(window), player(player
     });
     hpBar.setPosition({55, 55});
     maxHp = player.getHp();
-    ammoText.setPosition({weaponContainer.getPosition().x, static_cast<float>(weaponContainer.getPosition().y - weaponContainer.getSize().y * 0.75)});
+    ammoText.setPosition({
+        weaponContainer.getPosition().x,
+        static_cast<float>(weaponContainer.getPosition().y - weaponContainer.getSize().y * 0.75)
+    });
     ammoText.setCharacterSize(32);
     ammoText.setFillColor(sf::Color::White);
-
 }
 
 void UI::update() {

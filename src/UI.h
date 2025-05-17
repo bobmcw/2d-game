@@ -15,6 +15,7 @@ public:
     void updateWeapon();
 
     void draw();
+
 private:
     RenderWindow &window;
     Player &player;
@@ -26,7 +27,6 @@ private:
     Font font;
     int maxHp;
 };
-
 
 
 #endif //UI_H

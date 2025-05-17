@@ -1,4 +1,3 @@
-
 #ifndef WEAPON_H
 #define WEAPON_H
 #include "ProjectileManager.h"
@@ -15,8 +14,11 @@ enum class weaponType {
 class Weapon {
 public:
     Weapon(weaponType type, ProjectileManager &projectile_manager);
+
     Weapon(ProjectileManager &projectile_manager);
+
     Weapon(int id, ProjectileManager &projectile_manager);
+
     void shoot(sf::Vector2f direction, sf::Vector2f position);
 
     void applyRandomSpread(sf::Vector2<float> &v, float spread);
@@ -55,7 +57,6 @@ private:
     float spread;
     bool reloading;
 };
-
 
 
 #endif //WEAPON_H

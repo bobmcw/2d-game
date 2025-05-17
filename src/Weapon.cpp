@@ -11,7 +11,8 @@
 Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projectile_manager(
                                                                             std::ref(projectile_manager)),
                                                                         sprite(texture),
-                                                                        shotCooldown(sf::Clock()), reloading(false), reloadTimer(sf::Clock()) {
+                                                                        shotCooldown(sf::Clock()), reloading(false),
+                                                                        reloadTimer(sf::Clock()) {
     shotCooldown.start();
     reloadTimer.reset();
     texture = sf::Texture();
@@ -65,9 +66,11 @@ Weapon::Weapon(weaponType type, ProjectileManager &projectile_manager): projecti
     sprite.setPosition({750, 750});
 }
 
-Weapon::Weapon(ProjectileManager &projectile_manager): Weapon(randomWeaponType(), projectile_manager) {}
+Weapon::Weapon(ProjectileManager &projectile_manager): Weapon(randomWeaponType(), projectile_manager) {
+}
 
-Weapon::Weapon(int id, ProjectileManager &projectile_manager) : Weapon(idToType(id), projectile_manager) {}
+Weapon::Weapon(int id, ProjectileManager &projectile_manager) : Weapon(idToType(id), projectile_manager) {
+}
 
 void Weapon::shoot(sf::Vector2f direction, sf::Vector2f position) {
     if (shotCooldown.getElapsedTime().asSeconds() > firerate && ammo > 0) {
@@ -118,6 +121,7 @@ void Weapon::reload() {
 sf::Sprite &Weapon::getSprite() {
     return sprite;
 }
+
 int Weapon::getAmmo() const {
     return ammo;
 }
@@ -129,9 +133,11 @@ int Weapon::getId() const {
 int Weapon::getMaxAmmo() const {
     return maxAmmo;
 }
+
 bool Weapon::isReloading() const {
     return reloading;
 }
+
 weaponType Weapon::randomWeaponType() {
     auto types = std::vector<weaponType>{weaponType::ak47, weaponType::pistol, weaponType::ppbizon, weaponType::uzi};
     static std::random_device rd;
@@ -140,6 +146,7 @@ weaponType Weapon::randomWeaponType() {
     auto tmp = types[dist(gen)];
     return tmp;
 }
+
 weaponType Weapon::idToType(int id) {
     auto types = std::vector<weaponType>{weaponType::pistol, weaponType::ak47, weaponType::uzi, weaponType::ppbizon};
     return types.at(id);

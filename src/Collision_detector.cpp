@@ -32,7 +32,7 @@ void Collision_detector::spawnReward() {
 
 void Collision_detector::checkRewardCollision() {
    if (reward.getSprite().getGlobalBounds().findIntersection(player.getSprite().getGlobalBounds()) && !rewardPickedUp) {
-       player.setWeapon(reward);
+       player.setWeapon(std::move(reward));
        rewardPickedUp = true;
    }
 }

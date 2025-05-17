@@ -47,7 +47,7 @@ public:
 
     void takeDamage();
 
-    void setWeapon(Weapon w);
+    void setWeapon(Weapon &&w);
 
     void setWeapon(int id);
 

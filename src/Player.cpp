@@ -35,7 +35,7 @@ int Player::getHp() {
 }
 
 void Player::setHp(int hp) {
-    hp = hp;
+    this->hp = hp;
 }
 
 void Player::takeDamage() {

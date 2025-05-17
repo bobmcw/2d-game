@@ -149,7 +149,7 @@ void Player::handleShooting() {
 }
 
 void Player::handleMove() {
-    auto MAX_VELOCITY = 3.0f;
+    auto MAX_VELOCITY = 2.5f;
     //account for floating point inaccuracy
     if (this->velocity.y > -0.1f && this->velocity.y < 0.1f) {
         this->velocity.y = 0.0f;

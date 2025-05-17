@@ -9,7 +9,9 @@
 
 class Collision_detector {
 public:
-    Collision_detector(Player &player, std::vector<std::unique_ptr<Terrain>> &loaded_terrain, ProjectileManager &projectile_manager, EnemyController &enemy_controller, Map_parser &map_parser, SaverAndLoader &saveManager);
+    Collision_detector(Player &player, std::vector<std::unique_ptr<Terrain> > &loaded_terrain,
+                       ProjectileManager &projectile_manager, EnemyController &enemy_controller, Map_parser &map_parser,
+                       SaverAndLoader &saveManager);
 
     void handleEndOfLvl();
 
@@ -20,11 +22,13 @@ public:
     void update();
 
     void checkColisionWithPlayer();
+
     void checkProjectilesCollision();
+
 private:
     Player &player;
     SaverAndLoader &saveManager;
-    std::vector<std::unique_ptr<Terrain>> &loaded_terrain;
+    std::vector<std::unique_ptr<Terrain> > &loaded_terrain;
     ProjectileManager &projectile_manager;
     EnemyController &enemy_controller;
     Map_parser &map_parser;
@@ -32,7 +36,6 @@ private:
     Weapon reward;
     bool rewardPickedUp;
 };
-
 
 
 #endif //COLLISION_DETECTOR_H

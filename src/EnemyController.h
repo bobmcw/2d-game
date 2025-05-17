@@ -10,16 +10,20 @@
 class EnemyController {
 public:
     EnemyController(sf::RenderWindow &window, Player &player);
+
     void addEnemy(std::unique_ptr<Enemy> e);
+
     void removeEnemy(std::unique_ptr<Enemy> e);
+
     void updateEnemies();
-    std::vector<std::unique_ptr<Enemy>>& getEnemies();
+
+    std::vector<std::unique_ptr<Enemy> > &getEnemies();
+
 private:
-    std::vector<std::unique_ptr<Enemy>> enemies;
+    std::vector<std::unique_ptr<Enemy> > enemies;
     sf::RenderWindow &window;
     Player &player;
 };
-
 
 
 #endif //ENEMYCONTROLLER_H

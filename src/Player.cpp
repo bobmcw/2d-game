@@ -76,7 +76,7 @@ void Player::shoot() {
     auto angle = std::atan2(delta.y, delta.x);
     //https://en.sfml-dev.org/forums/index.php?topic=5992.0
     auto position = sprite.getGlobalBounds().getCenter() + Vector2f(50 * cos(angle), 50 * sin(angle));
-    auto direction = sf::Vector2f(std::cos(angle), std::sin(angle));
+    auto direction = sf::Vector2f(std::cos(angle) * 1.5, std::sin(angle) * 1.5);
     if (!weapon.isReloading()) {
         weapon.shoot(direction, position);
     }

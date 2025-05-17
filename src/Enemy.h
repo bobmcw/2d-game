@@ -36,24 +36,25 @@ protected:
 
 class Shooting_enemy : public Enemy {
 public:
-    Shooting_enemy(float initialX, float initialY,ProjectileManager &projectile_manager);
+    Shooting_enemy(float initialX, float initialY, ProjectileManager &projectile_manager);
 
     void shootTowards(sf::Vector2f position);
 
     void enemyAction(sf::Vector2f playerPosition) override;
 
 protected:
-    ProjectileManager& projectile_manager;
+    ProjectileManager &projectile_manager;
     sf::Clock shootingCooldown;
 };
 
 class Boss : public Shooting_enemy {
 public:
-    Boss(float initialX, float initialY,ProjectileManager &projectile_manager);
+    Boss(float initialX, float initialY, ProjectileManager &projectile_manager);
 
     void circleAttack(sf::Vector2f playerPosition);
 
     void enemyAction(sf::Vector2f playerPosition) override;
+
 private:
     sf::Clock specialAttackTimer;
 };

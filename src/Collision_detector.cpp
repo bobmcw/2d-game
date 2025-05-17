@@ -86,7 +86,6 @@ void Collision_detector::checkColisionWithPlayer() {
         else if (player.getSprite().getGlobalBounds().findIntersection((*t).getSprite().getGlobalBounds())) {
             if (auto o = dynamic_cast<Openable *>(t.get())) {
                 if (o->isOpened()) {
-                    std::cout << "next lvl";
                     reward = Weapon(std::ref(projectile_manager));
                     reward.rebindTexture();
                     rewardPickedUp = false;

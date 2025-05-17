@@ -54,7 +54,6 @@ void Map_parser::load_maps() {
         loadMap(m);
     }
     loadMap(std::filesystem::directory_entry(fs::path("./Assets/special_maps/boss.map")));
-    fmt::println("{}", mapOrder);
 }
 
 void Map_parser::loadMap(std::filesystem::directory_entry const &mapFile) {

@@ -114,7 +114,6 @@ void Weapon::reload() {
         reloadTimer.reset();
         ammo = maxAmmo;
         reloading = false;
-        fmt::println("reloaded");
     }
 }
 

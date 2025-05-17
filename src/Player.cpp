@@ -11,7 +11,7 @@ using namespace sf;
 Player::Player(RenderWindow &window, ProjectileManager &projectile_manager)
     : sprite(this->texture), window(window), projectile_manager(projectile_manager), hp(10), font("Assets/ByteBounce.ttf"), reloadText(font),
       weapon(Weapon(weaponType::ak47, projectile_manager)) {
-    this->pressedKeys = PressedKeys();
+    pressedKeys = PressedKeys();
     this->texture = Texture();
     if (!this->texture.loadFromFile("Assets/textures/player.png")) {
         std::cerr << "failed to load /Assets/textures/player.png";
@@ -27,7 +27,7 @@ Player::Player(RenderWindow &window, ProjectileManager &projectile_manager)
 }
 
 Sprite &Player::getSprite() {
-    return this->sprite;
+    return sprite;
 }
 
 int Player::getHp() {
@@ -46,11 +46,11 @@ void Player::takeDamage() {
 }
 
 void Player::setWeapon(Weapon&& w) {
-    this->weapon = std::move(w);
+    weapon = std::move(w);
     weapon.rebindTexture();
 }
 void Player::setWeapon(int id) {
-    this->weapon = Weapon(id,projectile_manager);
+    weapon = Weapon(id,projectile_manager);
     weapon.rebindTexture();
 }
 
@@ -62,20 +62,20 @@ void Player::drawCrosshair() {
     auto croshairVisualization = CircleShape(10);
     croshairVisualization.setFillColor(Color::Green);
     auto mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-    auto delta = mousePos - this->sprite.getPosition();
+    auto delta = mousePos - sprite.getPosition();
     auto angle = std::atan2(delta.y, delta.x);
     //https://en.sfml-dev.org/forums/index.php?topic=5992.0
     croshairVisualization.setPosition(
-        this->sprite.getGlobalBounds().getCenter() + Vector2f(50 * cos(angle), 50 * sin(angle)));
-    this->window.draw(croshairVisualization);
+        sprite.getGlobalBounds().getCenter() + Vector2f(50 * cos(angle), 50 * sin(angle)));
+    window.draw(croshairVisualization);
 }
 
 void Player::shoot() {
     auto mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-    auto delta = mousePos - this->sprite.getPosition();
+    auto delta = mousePos - sprite.getPosition();
     auto angle = std::atan2(delta.y, delta.x);
     //https://en.sfml-dev.org/forums/index.php?topic=5992.0
-    auto position = this->sprite.getGlobalBounds().getCenter() + Vector2f(50 * cos(angle), 50 * sin(angle));
+    auto position = sprite.getGlobalBounds().getCenter() + Vector2f(50 * cos(angle), 50 * sin(angle));
     auto direction = sf::Vector2f(std::cos(angle), std::sin(angle));
     if (!weapon.isReloading()) {
         weapon.shoot(direction, position);
@@ -95,35 +95,35 @@ void Player::handleReload() {
 }
 
 void Player::update() {
-    this->handleMove();
+    handleMove();
     handleReload();
-    this->drawCrosshair();
+    drawCrosshair();
     handleShooting();
-    this->draw();
+    draw();
 }
 
 void Player::listenForKeyPresses(std::optional<Event> event) {
     if (auto const e = event->getIf<Event::KeyPressed>()) {
         if (e->code == Keyboard::Key::W) {
-            this->pressedKeys.W = true;
+            pressedKeys.W = true;
         } else if (e->code == Keyboard::Key::S) {
-            this->pressedKeys.S = true;
+            pressedKeys.S = true;
         } else if (e->code == Keyboard::Key::A) {
-            this->pressedKeys.A = true;
+            pressedKeys.A = true;
         } else if (e->code == Keyboard::Key::D) {
-            this->pressedKeys.D = true;
+            pressedKeys.D = true;
         } else if (e->code == Keyboard::Key::R) {
             weapon.reload();
         }
     } else if (auto const e = event->getIf<Event::KeyReleased>()) {
         if (e->code == Keyboard::Key::W) {
-            this->pressedKeys.W = false;
+            pressedKeys.W = false;
         } else if (e->code == Keyboard::Key::S) {
-            this->pressedKeys.S = false;
+            pressedKeys.S = false;
         } else if (e->code == Keyboard::Key::A) {
-            this->pressedKeys.A = false;
+            pressedKeys.A = false;
         } else if (e->code == Keyboard::Key::D) {
-            this->pressedKeys.D = false;
+            pressedKeys.D = false;
         }
     } else if (auto const e = event->getIf<Event::MouseButtonPressed>()) {
         if (e->button == Mouse::Button::Left) {
@@ -157,7 +157,7 @@ void Player::handleMove() {
     if (this->velocity.x > -0.1f && this->velocity.x < 0.1f) {
         this->velocity.x = 0.0f;
     }
-    if (this->pressedKeys.W) {
+    if (pressedKeys.W) {
         if (this->velocity.y > 0.0f) {
             this->velocity.y = 0.0f;
         }
@@ -167,7 +167,7 @@ void Player::handleMove() {
     } else if (this->velocity.y < 0.0f) {
         this->velocity.y += 0.1f;
     }
-    if (this->pressedKeys.S) {
+    if (pressedKeys.S) {
         if (this->velocity.y < 0.0f) {
             this->velocity.y = 0.0f;
         }
@@ -177,7 +177,7 @@ void Player::handleMove() {
     } else if (this->velocity.y > 0.0f) {
         this->velocity.y += -0.1f;
     }
-    if (this->pressedKeys.A) {
+    if (pressedKeys.A) {
         if (this->velocity.x > 0.0f) {
             this->velocity.x = 0.0f;
         }
@@ -187,7 +187,7 @@ void Player::handleMove() {
     } else if (this->velocity.x < 0.0f) {
         this->velocity.x += 0.1;
     }
-    if (this->pressedKeys.D) {
+    if (pressedKeys.D) {
         if (this->velocity.x < 0.0f) {
             this->velocity.x = 0.0f;
         }

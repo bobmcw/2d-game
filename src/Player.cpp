@@ -9,18 +9,18 @@
 using namespace sf;
 
 Player::Player(RenderWindow &window, ProjectileManager &projectile_manager)
-    : sprite(this->texture), window(window), projectile_manager(projectile_manager), hp(10), font("Assets/ByteBounce.ttf"), reloadText(font),
+    : sprite(texture), window(window), projectile_manager(projectile_manager), hp(10), font("Assets/ByteBounce.ttf"), reloadText(font),
       weapon(Weapon(weaponType::ak47, projectile_manager)) {
     pressedKeys = PressedKeys();
-    this->texture = Texture();
-    if (!this->texture.loadFromFile("Assets/textures/player.png")) {
+    texture = Texture();
+    if (!texture.loadFromFile("Assets/textures/player.png")) {
         std::cerr << "failed to load /Assets/textures/player.png";
     }
-    this->sprite = Sprite(this->texture);
-    this->sprite.setPosition({750, 750});
-    this->sprite.setTextureRect(sf::IntRect({0, 0}, {50, 50}));
-    this->window.draw(this->sprite);
-    this->velocity = Vector2f(0, 0);
+    sprite = Sprite(texture);
+    sprite.setPosition({750, 750});
+    sprite.setTextureRect(sf::IntRect({0, 0}, {50, 50}));
+    window.draw(sprite);
+    velocity = Vector2f(0, 0);
     lmbPressedAndReleased = true;
     reloadText.setString("reloading...");
     reloadText.setCharacterSize(20);
@@ -35,7 +35,7 @@ int Player::getHp() {
 }
 
 void Player::setHp(int hp) {
-    this->hp = hp;
+    hp = hp;
 }
 
 void Player::takeDamage() {
@@ -151,55 +151,55 @@ void Player::handleShooting() {
 void Player::handleMove() {
     auto MAX_VELOCITY = 2.5f;
     //account for floating point inaccuracy
-    if (this->velocity.y > -0.1f && this->velocity.y < 0.1f) {
-        this->velocity.y = 0.0f;
+    if (velocity.y > -0.1f && velocity.y < 0.1f) {
+        velocity.y = 0.0f;
     }
-    if (this->velocity.x > -0.1f && this->velocity.x < 0.1f) {
-        this->velocity.x = 0.0f;
+    if (velocity.x > -0.1f && velocity.x < 0.1f) {
+        velocity.x = 0.0f;
     }
     if (pressedKeys.W) {
-        if (this->velocity.y > 0.0f) {
-            this->velocity.y = 0.0f;
+        if (velocity.y > 0.0f) {
+            velocity.y = 0.0f;
         }
-        if (this->velocity.y > -MAX_VELOCITY) {
-            this->velocity.y += -0.1f;
+        if (velocity.y > -MAX_VELOCITY) {
+            velocity.y += -0.1f;
         }
-    } else if (this->velocity.y < 0.0f) {
-        this->velocity.y += 0.1f;
+    } else if (velocity.y < 0.0f) {
+        velocity.y += 0.1f;
     }
     if (pressedKeys.S) {
-        if (this->velocity.y < 0.0f) {
-            this->velocity.y = 0.0f;
+        if (velocity.y < 0.0f) {
+            velocity.y = 0.0f;
         }
-        if (this->velocity.y < MAX_VELOCITY) {
-            this->velocity.y += 0.1f;
+        if (velocity.y < MAX_VELOCITY) {
+            velocity.y += 0.1f;
         }
-    } else if (this->velocity.y > 0.0f) {
-        this->velocity.y += -0.1f;
+    } else if (velocity.y > 0.0f) {
+        velocity.y += -0.1f;
     }
     if (pressedKeys.A) {
-        if (this->velocity.x > 0.0f) {
-            this->velocity.x = 0.0f;
+        if (velocity.x > 0.0f) {
+            velocity.x = 0.0f;
         }
-        if (this->velocity.x > -MAX_VELOCITY) {
-            this->velocity.x += -0.1f;
+        if (velocity.x > -MAX_VELOCITY) {
+            velocity.x += -0.1f;
         }
-    } else if (this->velocity.x < 0.0f) {
-        this->velocity.x += 0.1;
+    } else if (velocity.x < 0.0f) {
+        velocity.x += 0.1;
     }
     if (pressedKeys.D) {
-        if (this->velocity.x < 0.0f) {
-            this->velocity.x = 0.0f;
+        if (velocity.x < 0.0f) {
+            velocity.x = 0.0f;
         }
-        if (this->velocity.x < MAX_VELOCITY) {
-            this->velocity.x += 0.1f;
+        if (velocity.x < MAX_VELOCITY) {
+            velocity.x += 0.1f;
         }
-    } else if (this->velocity.x > 0.0f) {
-        this->velocity.x += -0.1f;
+    } else if (velocity.x > 0.0f) {
+        velocity.x += -0.1f;
     }
-    this->sprite.move(this->velocity);
+    sprite.move(velocity);
 }
 
 void Player::draw() {
-    this->window.draw(this->sprite);
+    window.draw(sprite);
 }

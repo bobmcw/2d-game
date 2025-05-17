@@ -1,4 +1,3 @@
-
 #include "Projectile.h"
 
 #include <iostream>
@@ -11,11 +10,8 @@ Projectile::Projectile(sf::Vector2f velocity, sf::Vector2f initialPosition): spr
     }
     this->texture.setRepeated(true);
     this->sprite = sf::Sprite(this->texture);
-    //this->sprite.setTextureRect(sf::IntRect({100,100},{50,50}));
     this->sprite.setPosition(initialPosition);
-
 }
 
 Projectile::~Projectile() {
-    //std::cout << "projectile destroyed";
 }

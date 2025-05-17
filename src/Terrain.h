@@ -1,5 +1,3 @@
-
-
 #ifndef TERAIN_H
 #define TERAIN_H
 #include "SFML/Graphics/RenderWindow.hpp"
@@ -11,24 +9,32 @@
 class Openable {
 public:
     virtual void open() = 0;
+
     virtual ~Openable() = default;
+
     virtual bool isOpened() = 0;
 };
 
 class Terrain {
 public:
     bool hasCollision;
+
     void draw() const;
+
     virtual ~Terrain() = default;
+
     sf::Sprite getSprite() {
         return this->sprite;
     }
+
 protected:
     int x;
     int y;
     int size;
-    sf::RenderWindow& window;
-    Terrain(sf::RenderWindow &window, int x, int y, const std::string& textureName);
+    sf::RenderWindow &window;
+
+    Terrain(sf::RenderWindow &window, int x, int y, const std::string &textureName);
+
     sf::Texture texture;
     sf::Sprite sprite;
 };
@@ -46,8 +52,11 @@ public:
 class Hatch : public Terrain, public Openable {
 public:
     Hatch(sf::RenderWindow &window, int x, int y);
+
     void open() override;
+
     bool isOpened() override;
+
 private:
     bool isOpen;
     sf::Texture openTexture;

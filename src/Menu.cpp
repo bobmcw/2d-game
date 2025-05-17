@@ -1,7 +1,7 @@
 #include "Menu.h"
 
-Menu::Menu(sf::RenderWindow &window, SaverAndLoader &saveManager, Map_parser &mapLoader, Player &player) : menu_(
-        sf::RectangleShape({
+Menu::Menu(RenderWindow &window, SaverAndLoader &saveManager, Map_parser &mapLoader, Player &player) : menu_(
+        RectangleShape({
             static_cast<float>(window.getSize().x),
             static_cast<float>(window.getSize().y)
         })), player(player), mapLoader(mapLoader), window(window), saveManager(saveManager), isActive_(true),
@@ -10,7 +10,7 @@ Menu::Menu(sf::RenderWindow &window, SaverAndLoader &saveManager, Map_parser &ma
         Option(options::Continue, "Continue", [this]() { this->loadAndStart(); }),
         Option(options::Exit, "Exit", [&window]() { window.close(); })
     }), selectedIndex(0) {
-    menu_.setFillColor(sf::Color::Black);
+    menu_.setFillColor(Color::Black);
 }
 
 void Menu::displayMenu() {
@@ -30,7 +30,7 @@ void Menu::startNewGame() {
     player.setHp(10);
     mapLoader.load_maps();
     mapLoader.load_current_map();
-    player.getSprite().setPosition({750,750});
+    player.getSprite().setPosition({750, 750});
     hideMenu();
 }
 

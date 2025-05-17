@@ -20,6 +20,7 @@ struct Option {
     options val;
     sf::Text text;
     std::function<void()> callback;
+
     Option(options o, std::string text, std::function<void()> f) : val(o), text(font), callback(std::move(f)) {
         this->text.setString(text);
         this->text.setCharacterSize(24);
@@ -30,6 +31,7 @@ struct Option {
 class Menu {
 public:
     Menu(sf::RenderWindow &window, SaverAndLoader &saveManager, Map_parser &mapLoader, Player &player);
+
     void displayMenu();
 
     void startNewGame();
@@ -45,9 +47,12 @@ public:
     void highlightSelected();
 
     void listenToKeyPresses(std::optional<sf::Event> event);
+
 private:
     void moveUp();
+
     void moveDown();
+
     sf::RenderWindow &window;
     SaverAndLoader &saveManager;
     Map_parser &mapLoader;
@@ -57,7 +62,6 @@ private:
     std::vector<Option> options;
     int selectedIndex;
 };
-
 
 
 #endif //MENU_H

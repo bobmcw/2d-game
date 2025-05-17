@@ -14,9 +14,10 @@ void SaverAndLoader::savePlayer() {
     playerFile << player.getHp() << '\n';
     playerFile << player.getWeapon().getId() << '\n';
 }
+
 void SaverAndLoader::saveMaps() {
     std::ofstream mapsFile("maps.dat");
-    for (auto const &m : map_parser.getMapOrder()) {
+    for (auto const &m: map_parser.getMapOrder()) {
         mapsFile << m << '\n';
     }
 }
@@ -33,8 +34,9 @@ void SaverAndLoader::loadPlayer() {
     in >> hp >> weaponId;
     player.setHp(std::stoi(hp));
     player.setWeapon(std::stoi(weaponId));
-    player.getSprite().setPosition({750,750});
+    player.getSprite().setPosition({750, 750});
 }
+
 void SaverAndLoader::loadMaps() {
     std::ifstream in("maps.dat");
     std::string directory;
